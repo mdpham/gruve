@@ -1,19 +1,22 @@
 <template name="gruve">
-	{{> topbar}}
-	{{> sidebar}}
+	{{> leftbar}}
 	{{> pusher}}
+	{{> rightbar}}
 </template>
 
-<template name="topbar">
-	<div class="ui inverted top fixed menu">
-	</div>
-</template>
-<template name="sidebar">
-	<div class="ui sidebar">
-		sidebar
+<template name="leftbar">
+	<div class="ui vertical visible left sidebar">
+		left
 	</div>
 	
 </template>
 <template name="pusher">
-	pusher
+	<div class="pusher">
+		pusher
+	</div>
+</template>
+<template name="rightbar">
+	<div class="ui vertical visible very thin right sidebar">
+		right
+	</div>
 </template>
