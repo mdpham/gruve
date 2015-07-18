@@ -1,7 +1,7 @@
 Meteor.startup(function () {
   config = {
     client_id: "9d3700f41a6e7c052108742a6d661971",
-    username: "phamartin", //user_id: 49699208
+    username: "phamartin", //user_id: 49699208git
     api: "http://api.soundcloud.com"
   };
 
