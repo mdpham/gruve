@@ -23,26 +23,30 @@ gruve.controller("homeCtrl",
 		};
 
 		$scope.playTrack = function(id){
-			SC.stream("/tracks/"+id, {
-				onfinish: function(){
-					console.log("FINISHED PLAYING TRACK ", id);
-				},
-				onload: function(){
-					console.log("LOADED ", id);
-				},
-				onplay: function(){
-					console.log("PALYED", id);
-				}
-			}, function(sound){
-				console.log("sound:", sound);
-				//Stop playing track
-				if ($scope.selectedTrack) {
-					$scope.selectedTrack.stop();
-				};
-				//Load and play
-				$scope.selectedTrack = sound;
-				$scope.selectedTrack.play();
-			});
+			SC.get("/tracks/"+id, function(track){
+				//Waveform
+				$("#waveform-canvas").empty();
+				var waveform = new Waveform({
+					container: document.getElementById("waveform-canvas"),
+					innerColor: "#333"
+				});
+				waveform.dataFromSoundCloudTrack(track);
+
+				//Stream
+				SC.stream(track.uri, {}, function(sound){
+					console.log("sound:", sound);
+					//Stop playing track
+					if ($scope.selectedTrack) {
+						$scope.selectedTrack.stop();
+					};
+					//Handle sound object
+					$scope.selectedTrack = sound;
+					console.log($scope.selectedTrack);
+					//Progress
+					$scope.selectedTrack.play();
+				});
+
+			})
 		};
 
 		$scope.togglePlay = function(){

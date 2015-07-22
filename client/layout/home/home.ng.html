@@ -25,15 +25,19 @@ CONTENT:
 SONGS	
  -->
 <div class="ui attached bottom segment">
+	<div id="waveform-canvas" class="ui fluid container" style="height: 100px">
+	</div>
 	<div class="ui four column stackable double grid">
 		<!-- <div class="column" ng-bind="test"></div> -->
 		<div class="column" ng-repeat="track in tracks">
-			<div class="ui small image">
-			  <img ng-src="{{track.artwork_url}}">
-			</div>
-			<span ng-bind="track.uri"></span><br>
-			<span ng-bind="track.title"></span>
-			<button ng-click="playTrack(track.id)"></button>
+				<div class="ui fluid image" ng-click="playTrack(track.id)">
+				  <img ng-src="{{track.artwork_url}}">
+				</div>
+<!-- 				<span ng-bind="track.uri"></span><br>
+				<span ng-bind="track.title"></span> -->
+				<!-- <button ng-click="playTrack(track.id)"></button> -->
 		</div>
+
+		<!-- Waveform -->
 	</div>
 </div>
