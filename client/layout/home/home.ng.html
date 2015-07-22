@@ -3,19 +3,27 @@ TOP MENU:
 Navigation
  -->
 <div class="ui top attached main menu">
-	<div class="ui fluid scontainer">
-		<a class="item">Expand</a>
-		<button class="item" ng-click="togglePlay()"> pause</button>
+	<div class="ui fluid container main-menu-container">
+		<a class="item" ng-click="togglePlaylists()">
+			<i class="calendar outline icon"></i>
+		</a>
+		<a class="item" ng-click="togglePlay()">
+			<span>{{playState}}</span>
+		</a>
 	</div>
 </div>
+
+
 <!-- 
 HIDDEN MENU:
 PLAYLISTS
  -->
-<div class="ui fluid container">
+<div class="ui fluid container playlist-container">
 	<div class="ui four column stackable double grid">
 		<div class="column" ng-repeat="playlist in playlists">
-			<a ng-click="selectPlaylist(playlist.id)"><span  ng-bind="playlist.title"></span></a>
+			<a ng-click="selectPlaylist(playlist.id)">
+				<span  ng-bind="playlist.title"></span>
+			</a>
 		</div>
 	</div>
 </div>
@@ -25,19 +33,41 @@ CONTENT:
 SONGS	
  -->
 <div class="ui attached bottom segment">
-	<div id="waveform-canvas" class="ui fluid container" style="height: 100px">
-	</div>
-	<div class="ui four column stackable double grid">
+	<div class="ui five column stackable grid tracks-container">
 		<!-- <div class="column" ng-bind="test"></div> -->
 		<div class="column" ng-repeat="track in tracks">
-				<div class="ui fluid image" ng-click="playTrack(track.id)">
-				  <img ng-src="{{track.artwork_url}}">
+			<div class="ui card">
+				<div class="image">
+					<img ng-src="{{track.artwork_url}}">
 				</div>
-<!-- 				<span ng-bind="track.uri"></span><br>
-				<span ng-bind="track.title"></span> -->
-				<!-- <button ng-click="playTrack(track.id)"></button> -->
+				<div class="content">
+					<a class="header">
+						<span ng-bind="track.title"></span>
+					</a>
+					<div class="meta">
+					  <span class="left floated">
+					  	<i class="play icon"></i>
+					  	<span ng-bind="track.playback_count"></span>
+					  </span>
+					  <span class="right floated">
+					  	<i class="heart icon"></i>
+					  	<span ng-bind="track.favoritings_count"></span>
+					  </span>
+					</div>
+					<div class="description">
+						description here
+					</div>
+				</div>
+			  	<div class="extra content">
+					<span class="left floated">
+						<a ng-click="playTrack(track.id)">Play</a>
+					</span>
+					<span class="right floated">
+						<a ng-href="{{track.permalink_url}}">See More</a>
+					</span>
+				</div>
+			</div>
 		</div>
-
-		<!-- Waveform -->
 	</div>
+
 </div>
