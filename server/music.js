@@ -1,3 +1,11 @@
-Meteor.publish("songs", function(){
-	return Songs.find({});
+Meteor.publish("playlists", function(){
+	return Playlists.find({});
+})
+
+Meteor.startup(function(){
+	Meteor.methods({
+		clearPlaylists: function(){
+			Playlists.remove({});
+		}
+	})
 })

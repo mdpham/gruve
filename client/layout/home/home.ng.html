@@ -12,7 +12,11 @@ HIDDEN MENU:
 PLAYLISTS
  -->
 <div class="ui fluid container">
-	hidden
+	<div class="ui four column stackable double grid">
+		<div class="column" ng-repeat="playlist in playlists">
+			<a ng-click="selectPlaylist(playlist.id)"><span  ng-bind="playlist.title"></span></a>
+		</div>
+	</div>
 </div>
 
 <!-- 
@@ -21,10 +25,11 @@ SONGS
  -->
 <div class="ui attached bottom segment">
 	<div class="ui four column stackable double grid">
-		<div class="column" ng-bind="test">
-		</div>
-		<div class="column" ng-repeat="song in songs">
-			1
+		<!-- <div class="column" ng-bind="test"></div> -->
+		<div class="column" ng-repeat="track in tracks">
+			<span ng-bind="track.uri"></span><br>
+			<span ng-bind="track.title"></span>
+			<button ng-click="playTrack(track.id)"></button>
 		</div>
 	</div>
 </div>

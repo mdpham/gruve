@@ -12,4 +12,5 @@ if (Meteor.isCordova) {
 	angular.element(document).ready(onReady);
 };
 
-Meteor.subscribe("songs");
+
+Meteor.subscribe("playlists");
