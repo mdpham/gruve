@@ -12,5 +12,5 @@ if (Meteor.isCordova) {
 	angular.element(document).ready(onReady);
 };
 
-
 Meteor.subscribe("playlists");
+
