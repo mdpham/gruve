@@ -2,15 +2,16 @@ gruve.controller("homeCtrl",
 	["$scope","$meteor",
 	function($scope, $meteor){
 		console.log("homecontroller");
-		$scope.init = function(){
-		};
-
 
 		$scope.playlists = $meteor.collection(Playlists);
 		$meteor.autorun($scope, function(){
 			$meteor.subscribe("playlists").then(function(){
 				$scope.playlists = $meteor.collection(Playlists);
 				// console.log("playlists:", $scope.playlists);
+			});
+
+			$('div.track-card.card .image').dimmer({
+			  on: 'hover'
 			});
 		});
 
