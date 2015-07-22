@@ -2,7 +2,9 @@ gruve.controller("homeCtrl",
 	["$scope","$meteor",
 	function($scope, $meteor){
 		console.log("homecontroller");
-		$scope.test = "TEST";
+		$scope.init = function(){
+		};
+
 
 		$scope.playlists = $meteor.collection(Playlists);
 		$meteor.autorun($scope, function(){
@@ -34,27 +36,6 @@ gruve.controller("homeCtrl",
 		$scope.playState = "pick a song";
 		$scope.playTrack = function(id){
 			SC.get("/tracks/"+id, function(track){
-				// //Waveform
-				// $("#waveform-canvas").empty();
-				// var waveform = new Waveform({
-				// 	container: document.getElementById("waveform-canvas"),
-				// 	innerColor: "#333"
-				// });
-				// waveform.dataFromSoundCloudTrack(track);
-
-				//Stream
-				// SC.stream(track.uri, {}, function(sound){
-				// 	console.log("sound:", sound);
-				// 	//Stop playing track
-				// 	if ($scope.selectedTrack) {
-				// 		$scope.selectedTrack.stop();
-				// 	};
-				// 	//Handle sound object
-				// 	$scope.selectedTrack = sound;
-				// 	console.log($scope.selectedTrack);
-				// 	//Progress
-				// 	$scope.selectedTrack.play();
-				// });
 				console.log(track);
 				//Reset sounds
 				soundManager.stopAll();

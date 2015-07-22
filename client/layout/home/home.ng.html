@@ -36,20 +36,29 @@ SONGS
 	<div class="ui five column stackable grid tracks-container">
 		<!-- <div class="column" ng-bind="test"></div> -->
 		<div class="column" ng-repeat="track in tracks">
-			<div class="ui card">
-				<div class="image">
-					<img ng-src="{{track.artwork_url}}">
+			<div class="ui card track-card">
+				<!-- Image -->
+				<div class="blurring dimmable image">
+				  <div class="ui dimmer">
+				    <div class="content">
+				      <div class="center">
+				        <div class="ui inverted button">Add Friend</div>
+				      </div>
+				    </div>
+				  </div>
+				  <img ng-src="{{track.artwork_url}}">
 				</div>
+				<!-- Content -->
 				<div class="content">
 					<a class="header">
 						<span ng-bind="track.title"></span>
 					</a>
 					<div class="meta">
-					  <span class="left floated">
+					  <span class="left floated play">
 					  	<i class="play icon"></i>
 					  	<span ng-bind="track.playback_count"></span>
 					  </span>
-					  <span class="right floated">
+					  <span class="right floated heart">
 					  	<i class="heart icon"></i>
 					  	<span ng-bind="track.favoritings_count"></span>
 					  </span>
