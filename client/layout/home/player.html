@@ -3,9 +3,27 @@
   <!-- Player -->
   <div class="header">
     <div class="ui grid">
-      <div class="four wide column">4</div>    
-      <div class="eight wide column">8</div>
-      <div class="four wide column">4</div>    
+      <div class="three wide column">
+        <div class="fluid ui three icon buttons">
+          <button class="ui red basic inverted button">
+            <i class="stop icon"></i>
+          </button>
+          <button class="ui yellow basic inverted button">
+            <i class="pause icon"></i>
+          </button>
+          <button class="ui green basic inverted button">
+            <i class="play icon"></i>
+          </button>
+        </div>
+      </div>    
+      <div class="nine wide column">
+        <h1 class="grey large ui left aligned inverted header">
+          Listening to...
+        </h1>
+      </div>
+      <div class="four wide column">
+        4
+      </div>    
     </div>
   </div>
   <!-- Content -->
@@ -20,44 +38,55 @@
       <div class="nine wide column">
         <div class="ui raised inverted segment">
           <!-- current-track-info: artist and track title -->
-          <h1 class="ui olive left aligned header current-track-info">
+          <h1 class="ui grey left aligned header current-track-info">
             <span class="current-username" ng-bind="currentTrack.user.username"></span>
             <div class="ui inverted divider"></div>
             <span class="current-title" ng-bind="currentTrack.title"></span>
           </h1>
         </div>
           <!-- current-track-progress: position and duration -->
-          <h2 class="ui olive center aligned header current-track-progress">
+          <h1 class="ui grey center aligned header current-track-progress">
             <span class="current-track-position"></span>/<span ng-bind="currentTrack.duration"></span>
-          </h2>
+          </h1>
 
 <!--         <div class="waveform-container">
           <img class="ui fluid image current-waveform testfilter">
         </div> -->
       </div>
-      <!-- Previous Song -->
-      <div class="two wide column">
-        <div class="ui card">
-          <div class="image">
-            <div class="ui top attached label">
-              <h5 class="ui center aligned header">Previous</h5>
+      <!-- Previous/Next -->
+      <div class="four wide column">
+        <div class="ui two column grid">
+          <!-- Previous Song -->
+          <div class="column">
+            <div class="ui card">
+              <div class="image">
+                <div class="ui top attached label">
+                  <h4 class="ui center aligned header">
+                    <i class="backward icon"></i>
+                    <!-- Previous -->
+                  </h4>
+                </div>
+                <img class="ui fluid image previous-artwork" src="images/missing.png">
+              </div>
             </div>
-            <img class="ui fluid image previous-artwork" src="images/missing.png">
           </div>
+          <!-- Next Song -->
+          <div class="column">
+            <div class="ui card">
+              <div class="image">
+                <div class="ui top attached label">
+                  <h4 class="ui center aligned header">
+                    <!-- Next -->
+                    <i class="forward icon"></i>
+                  </h4>
+                </div>
+                <img class="ui fluid image next-artwork" src="images/missing.png">
+              </div>
+            </div>
+          </div>
+          <!--  -->
         </div>
       </div>
-      <!-- Next Song -->
-      <div class="two wide column">
-        <div class="ui card">
-          <div class="image">
-            <div class="ui top attached label">
-              <h5 class="ui center aligned header">Next</h5>
-            </div>
-            <img class="ui fluid image next-artwork" src="images/missing.png">
-          </div>
-        </div>
-      </div>
-      <!--  -->
     </div>
   </div>
   <!-- Actions -->

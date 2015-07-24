@@ -65,8 +65,9 @@ gruve.controller("homeCtrl",
 			track.duration = toPositionTime(track.duration);
 			$scope.currentTrack = track;
 			//Update artwork in player
-			$("img.current-artwork").attr("src", track.artwork_url);
-			$("img.current-waveform").attr("src", track.waveform_url);
+			console.log(track.artwork_url);
+			$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
+			// $("img.current-waveform").attr("src", track.waveform_url);
 		};
 
 		$scope.selectTrack = function(id){
