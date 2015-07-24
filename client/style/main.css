@@ -1,4 +1,23 @@
+/*Artwork*/
 img.artwork-icon {
 	height: 100px;
 	width: 100px;	
+}
+/*Waveform Filters*/
+/*Filter styles*/
+.saturate {-webkit-filter: saturate(3);}
+.grayscale {-webkit-filter: grayscale(100%);}
+.contrast {-webkit-filter: contrast(160%);}
+.brightness {-webkit-filter: brightness(0.25);}
+.blur {-webkit-filter: blur(3px);}
+.invert {-webkit-filter: invert(100%);}
+.sepia {-webkit-filter: sepia(100%);}
+.huerotate {-webkit-filter: hue-rotate(180deg);}
+.rss.opacity {-webkit-filter: opacity(50%);}
+
+.waveform-container {
+	/*background-color: rgba(236,236,236, 0.5);*/
+}
+.testfilter {
+	/*-webkit-filter: grayscale(1) opacity(0.4);*/
 }
