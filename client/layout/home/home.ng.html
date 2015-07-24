@@ -21,7 +21,7 @@ PLAYLISTS
 <div class="ui fluid container playlist-container">
 	<div class="ui four column stackable double grid">
 		<div class="column" ng-repeat="playlist in playlists">
-			<a ng-click="selectPlaylist(playlist.id)">
+			<a class="ui button" ng-click="selectPlaylist(playlist.id)">
 				<span  ng-bind="playlist.title"></span>
 			</a>
 		</div>
