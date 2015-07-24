@@ -1,0 +1,11 @@
+<template name="menu-player">
+<div class="item">
+  <div class=""><span ng-bind="currentTrack.user.username"></span></div>
+  <i class="right chevron icon divider"></i>
+  <div class=""><span ng-bind="currentTrack.title"></span></div>
+  <i class="right chevron icon divider"></i>
+  <div class="active ">
+  	<span class="current-track-position"></span>/<span ng-bind="currentTrack.duration"></span>
+  </div>
+</div>
+</template>

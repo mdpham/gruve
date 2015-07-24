@@ -91,7 +91,7 @@ gruve.controller("homeCtrl",
 						whileplaying: function(){
 							//sm object
 							// console.log(this);
-							$(".current-track-progress .current-track-position").text(toPositionTime(this.position));
+							$(".current-track-position").text(toPositionTime(this.position));
 						}
 					}).play();
 
@@ -102,6 +102,7 @@ gruve.controller("homeCtrl",
 				.then(function(track){
 					console.log(track, "asd");
 					$(players.playing).modal("setting", "closable", false).modal("show");
+					state.playing = true;
 				});
 
 
