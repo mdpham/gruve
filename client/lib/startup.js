@@ -2,7 +2,12 @@ Meteor.startup(function () {
 	config = {
 		client_id: "9d3700f41a6e7c052108742a6d661971",
 		username: "phamartin", //user_id: 49699208git
-		api: "http://api.soundcloud.com"
+		api: {
+			base: "http://api.soundcloud.com",
+			tracks: "http://api.soundcloud.com/tracks/",
+			users: "http://api.soundcloud.com/users/",
+			credentials: "?client_id=9d3700f41a6e7c052108742a6d661971"
+		}
 	};
 
 	// Initialize SC connection
@@ -17,7 +22,7 @@ Meteor.startup(function () {
 	function(user){
 		// console.log(user);
 		//Get user
-		SC.get(config.api+"/users/"+user.id+"/playlists?client_id="+config.client_id, 
+		SC.get(config.api.users+user.id+"/playlists?client_id="+config.client_id, 
 			function(data){
 				// console.log(data);
 				Meteor.call("clearPlaylists", function(){
