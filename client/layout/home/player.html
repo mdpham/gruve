@@ -1,0 +1,96 @@
+<template name="player">
+<div class="ui basic fullscreen modal player playing">
+  <!-- Player -->
+  <div class="header">
+    <div class="ui grid">
+      <div class="four wide column">4</div>    
+      <div class="eight wide column">8</div>
+      <div class="four wide column">4</div>    
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="content">
+    <!-- PLAYING STATE -->
+    <div class="ui grid">
+      <!-- Track artwork -->
+      <div class="three wide column">
+        <img class="ui fluid image current-artwork">
+      </div>
+      <!-- Track information -->
+      <div class="nine wide column">
+        <div class="ui inverted segment">
+          <!-- current-track-info: artist and track title -->
+          <h1 class="ui olive left aligned header current-track-info">
+            <span class="current-username" ng-bind="currentTrack.user.username"></span>
+            <div class="ui inverted divider"></div>
+            <span class="current-title" ng-bind="currentTrack.title"></span>
+          </h1>
+        </div>
+          <!-- current-track-progress: position and duration -->
+          <h2 class="ui olive center aligned header current-track-progress">
+            <span class="current-track-position"></span>/<span ng-bind="currentTrack.duration"></span>
+          </h2>
+<!--         <div class="waveform-container">
+          <img class="ui fluid image current-waveform testfilter">
+        </div> -->
+      </div>
+      <!-- Previous Song -->
+      <div class="two wide column">
+        <div class="ui card">
+          <div class="image">
+            <div class="ui top attached label">
+              <h5 class="ui center aligned header">Previous</h5>
+            </div>
+            <img class="ui fluid image previous-artwork" src="images/missing.png">
+          </div>
+        </div>
+      </div>
+      <!-- Next Song -->
+      <div class="two wide column">
+        <div class="ui card">
+          <div class="image">
+            <div class="ui top attached label">
+              <h5 class="ui center aligned header">Next</h5>
+            </div>
+            <img class="ui fluid image next-artwork" src="images/missing.png">
+          </div>
+        </div>
+      </div>
+      <!--  -->
+    </div>
+  </div>
+  <!-- Actions -->
+  <div class="actions">
+    <div class="ui black deny button">
+      Exit
+    </div>
+  </div>
+</div>
+
+<!--  -->
+
+<div class="ui basic fullscreen modal player idle">
+  <!-- Player -->
+  <div class="header">
+    <div class="ui grid">
+      <div class="four wide column">NOT</div>    
+      <div class="eight wide column">PLAYING</div>
+      <div class="four wide column">4</div>    
+    </div>
+  </div>
+  <!-- Content -->
+  <div class="content">
+    <!-- IDLE STATE -->
+    <div class="ui grid">
+      IDLE
+    </div>
+  </div>
+  <!-- Actions -->
+  <div class="actions">
+    <div class="ui black deny button">
+      Exit
+    </div>
+  </div>
+</div>
+
+</template>
