@@ -2,14 +2,18 @@
 TOP MENU:
 Navigation
  -->
-<div class="ui top attached main menu">
-	<div class="ui fluid container main-menu-container">
+<div class="ui grid">
+	<div class="ui one wide column">
 		<a class="item" ng-click="togglePlaylists()">
 			<i class="calendar outline icon"></i>
 		</a>
+	</div>
+	<div class="ui one wide column">
 		<a class="item" ng-click="togglePlayer()">
 			<i class="music icon"></i>
 		</a>
+	</div>
+	<div class="ui fourteen wide column">
 		<meteor-include src="menu-player"></meteor-include>
 	</div>
 </div>
@@ -18,7 +22,7 @@ Navigation
 HIDDEN MENU:
 PLAYLISTS
  -->
-<div class="ui fluid container playlist-container">
+<div class="ui fluid segment playlist-container">
 	<div class="ui four column stackable double grid">
 		<div class="column" ng-repeat="playlist in playlists">
 			<a class="ui button" ng-click="selectPlaylist(playlist.id)">
@@ -31,7 +35,7 @@ PLAYLISTS
 CONTENT:
 SONGS	
  -->
-<div class="ui attached bottom segment">
+<div class="ui attached bottom segment content-container">
 	<div class="ui five column stackable grid tracks-container">
 		<div class="column" ng-repeat="track in tracks">
 			<div class="ui card">
