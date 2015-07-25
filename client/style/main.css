@@ -1,10 +1,11 @@
 /*MENU*/
 .main-menu-container {
 	height: 70px;
-};
+	position: fixed;
+}
 .tracks-container {
-	margin-top: 70px;
-};
+	margin-top: 70px !important;
+}
 
 /*Artwork*/
 /*img.artwork-icon {
