@@ -13,13 +13,18 @@
 <!-- TOP MENU: Navigation -->
 <div class="ui top fixed inverted menu main-menu-container">
 	<a class="item" ng-click="togglePlaylists()">
-		<i class="calendar outline icon"></i>
+		<i class="big calendar outline icon"></i>
 	</a>
 	<a class="item" ng-click="togglePlayer()">
-		<i class="music icon"></i>
+		<i class="big sound icon"></i>
 	</a>
-	<div class="item">
-		<meteor-include src="menu-player"></meteor-include>
+	<div class="right menu">
+		<div class="item">
+			<meteor-include src="menu-player"></meteor-include>
+		</div>
+		<a href="https://soundcloud.com" class="item">
+			<i class="big orange soundcloud icon"></i>
+		</a>
 	</div>
 </div>
 
