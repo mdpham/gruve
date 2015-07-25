@@ -1,0 +1,12 @@
+<!-- PLAYLISTS DROPDOWN MENU -->
+<template name="playlists">
+<div class="ui fluid olive inverted segment playlist-container">
+	<div class="ui four column stackable double grid">
+		<div class="column" ng-repeat="playlist in playlists">
+			<a class="ui button" ng-click="selectPlaylist(playlist.id)">
+				<span ng-bind="playlist.title"></span>
+			</a>
+		</div>
+	</div>
+</div>
+</template>

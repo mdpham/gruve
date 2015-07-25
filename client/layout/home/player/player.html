@@ -1,4 +1,6 @@
+<!-- INLCUDE BOTH IDLE AND PLAYING PLAYERS -->
 <template name="modal-player">
+<!-- PLAYER to show when playing, appears after any track has ever been selected-->
 <div class="ui basic fullscreen modal player playing">
   <!-- Player -->
   <div class="header">
@@ -99,23 +101,17 @@
   </div>
 </div>
 
-<!--  -->
-
+<!-- PLAYER to show up when idle, this only appears before a track has ever been selected -->
 <div class="ui basic fullscreen modal player idle">
   <!-- Player -->
   <div class="header">
-    <div class="ui grid">
-      <div class="four wide column">NOT</div>    
-      <div class="eight wide column">PLAYING</div>
-      <div class="four wide column">4</div>    
-    </div>
+    <h1 class="ui center olive aligned header">
+      <span>You're not listening to anything</span>
+    </h1>
   </div>
   <!-- Content -->
   <div class="content">
     <!-- IDLE STATE -->
-    <div class="ui grid">
-      IDLE
-    </div>
   </div>
   <!-- Actions -->
   <div class="actions">
@@ -124,5 +120,4 @@
     </div>
   </div>
 </div>
-
 </template>

@@ -1,0 +1,17 @@
+<!-- PLAYER Information in top menu of main content -->
+<template name="menu-player">
+<div class="ui large buttons">
+  <button class="ui button">
+  	<span ng-bind="currentTrack.user.username"></span>
+  </button>
+  <div class="or" data-text=">"></div>
+  <button class="ui button">
+  	<span ng-bind="currentTrack.title"></span>
+  </button>
+  <div class="or" data-text=">"></div>
+  <button class="ui button">
+  	<span class="current-track-position"></span>/<span ng-bind="currentTrack.duration"></span>
+  </button>
+</div>
+</template>
+<!-- @end PLAYER -->
