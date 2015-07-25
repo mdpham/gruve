@@ -1,41 +1,33 @@
 <!-- 
-TOP MENU:
-Navigation
- -->
-<div class="ui grid">
-	<div class="ui one wide column">
-		<a class="item" ng-click="togglePlaylists()">
-			<i class="calendar outline icon"></i>
-		</a>
-	</div>
-	<div class="ui one wide column">
-		<a class="item" ng-click="togglePlayer()">
-			<i class="music icon"></i>
-		</a>
-	</div>
-	<div class="ui fourteen wide column">
-		<meteor-include src="menu-player"></meteor-include>
-	</div>
-</div>
-
-<!-- 
 HIDDEN MENU:
 PLAYLISTS
  -->
-<div class="ui fluid segment playlist-container">
-	<div class="ui four column stackable double grid">
-		<div class="column" ng-repeat="playlist in playlists">
-			<a class="ui button" ng-click="selectPlaylist(playlist.id)">
-				<span ng-bind="playlist.title"></span>
-			</a>
-		</div>
-	</div>
+<div class="ui top icon sidebar playlists-topbar">
+	<meteor-include src="playlists"></meteor-include>
 </div>
+
+<div class="pusher">
+<!-- 
+TOP MENU:
+Navigation
+ -->
+<div class="ui top fixed main menu main-menu-container">
+
+		<a class="item" ng-click="togglePlaylists()">
+			<i class="calendar outline icon"></i>
+		</a>
+		<a class="item" ng-click="togglePlayer()">
+			<i class="music icon"></i>
+		</a>
+		<meteor-include src="menu-player"></meteor-include>
+</div>
+
+
 <!-- 
 CONTENT:
 SONGS	
  -->
-<div class="ui attached bottom segment content-container">
+<div class="ui container content-container">
 	<div class="ui five column stackable grid tracks-container">
 		<div class="column" ng-repeat="track in tracks">
 			<div class="ui card">
@@ -71,6 +63,7 @@ SONGS
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 <meteor-include src="modal-player"></meteor-include>

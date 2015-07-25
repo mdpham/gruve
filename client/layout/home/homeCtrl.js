@@ -53,7 +53,10 @@ gruve.controller("homeCtrl",
 		};
 
 		scope.togglePlaylists = function(){
-			$("div.playlist-container").transition("slide down");
+			// $("div.playlist-container").transition("slide down");
+			$(".sidebar.playlists-topbar")
+				  .sidebar('setting', 'transition', 'overlay')
+				  .sidebar('toggle')
 		};
 		scope.selectPlaylist = function(id) {
 			// console.log(scope.playlists, id);

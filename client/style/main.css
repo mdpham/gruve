@@ -1,15 +1,16 @@
 /*MENU*/
 .main-menu-container {
+	height: 70px;
 };
-.content-container {
-
-}
+.tracks-container {
+	margin-top: 70px;
+};
 
 /*Artwork*/
-img.artwork-icon {
+/*img.artwork-icon {
 	height: 100px;
 	width: 100px;	
-}
+};*/
 /*Waveform Filters*/
 /*Filter styles*/
 .saturate {-webkit-filter: saturate(3);}
