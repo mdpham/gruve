@@ -1,19 +1,40 @@
 gruve.controller("homeCtrl",
-	["$scope","$meteor","$http",
-	function($scope, $meteor, $http){
-		console.log("homecontroller");
+	["$scope","$meteor","$http","gruveState",
+	function($scope, $meteor, $http, gruveState){
+		scope = $scope;
 
-		$scope.playlists = $meteor.collection(Playlists);
-		$meteor.autorun($scope, function(){
+		//Playlists
+		scope.playlists = $meteor.collection(Playlists);
+		$meteor.autorun(scope, function(){
 			$meteor.subscribe("playlists").then(function(){
-				$scope.playlists = $meteor.collection(Playlists);
-				// console.log("playlists:", $scope.playlists);
+				scope.playlists = $meteor.collection(Playlists);
+				// console.log("playlists:", scope.playlists);
 			});
 		});
 
-		var state = {
-			playing: false
-		};
+		//STATE WATCHING//
+		//State starts with no playing and no player open
+		scope.gruveState = new gruveState(false, "stop", false);
+		//	On $digest(); State variable in scope.state is changed and then $digest() called
+		//Playing
+		// scope.$watch(
+		// 	function(){return scope.gruveState.getPlayingState()},
+		// 	function(newPlayingState, oldPlayingState){
+		// 		switch(newPlayingState) {
+		// 			//Song is playing
+		// 			case "play":
+		// 				console.log(scope.currentTrack);
+		// 				break;
+		// 			//Song is paused
+		// 			case "plause":
+		// 				break;
+		// 			//Song is stopped
+		// 			case "stop":
+		// 				break;
+		// 		}
+				
+		// 	}
+		// );
 
 		var players = {
 			all: ".ui.basic.fullscreen.modal.player.playing",
@@ -21,56 +42,51 @@ gruve.controller("homeCtrl",
 			idle: ".ui.basic.fullscreen.modal.player.idle"
 		};
 
-		$scope.togglePlayer = function(){
-			console.log(players.playing, $(".ui.basic.fullscreen.modal.player.playing"));
-			$(".ui.basic.fullscreen.modal.player").modal("hide");
-			if (state.playing) {
-				$(players.playing)
-					.modal("setting", "closable", false).modal("show");
+		scope.togglePlayer = function(){
+			//Start Discovering
+			$(players.all).modal("hide");
+			if (!scope.gruveState.getAudioState()) {
+				$(players.idle).modal("show");
 			} else {
-				$(players.idle)
-					.modal("setting", "closable", false).modal("show");
+				$(players.playing).modal("show");
 			}
 		};
 
-		$scope.togglePlaylists = function(){
+		scope.togglePlaylists = function(){
 			$("div.playlist-container").transition("slide down");
 		};
-		$scope.selectPlaylist = function(id) {
-			// console.log($scope.playlists, id);
-			var result = _.chain($scope.playlists)
+		scope.selectPlaylist = function(id) {
+			// console.log(scope.playlists, id);
+			var result = _.chain(scope.playlists)
 				.where({'id': id})
 				.first()
 				.value();
-			console.log("result", result);
 			_.each(result.tracks, function(t){
 				if (t.artwork_url == null) {t.artwork_url = "images/missing.png"}
 			});
-			$scope.tracks = result.tracks;
+			scope.tracks = result.tracks;
 
 			//Hide playlists
-			$scope.togglePlaylists();
+			scope.togglePlaylists();
 		};
 
-
-		var toPositionTime = function(ms) {
-			var minutes = ms/1000/60 << 0;
-			var seconds = ((ms/1000) % 60) << 0;
-			console.log(minutes, seconds);
+		var toPositionTime = function(posn_ms) {
+			var minutes = posn_ms/1000/60 << 0;
+			var seconds = ((posn_ms/1000) % 60) << 0;
 			seconds = (seconds < 10 ? "0": "") + seconds;
 			return minutes + ":" + seconds;
 		};
 		var updateCurrentTrack = function(track){
 			console.log(track);
 			track.duration = toPositionTime(track.duration);
-			$scope.currentTrack = track;
+			scope.currentTrack = track;
 			//Update artwork in player
 			console.log(track.artwork_url);
 			$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
-			// $("img.current-waveform").attr("src", track.waveform_url);
 		};
 
-		$scope.selectTrack = function(id){
+		scope.selectTrack = function(id){
+			scope.gruveState.getAudioState(true);
 			//SoundManager config for waveform
 			soundManager.setup({flashVersion: 9});
 
@@ -81,6 +97,7 @@ gruve.controller("homeCtrl",
 					console.log(result)
 					var track = result.data;
 					console.log(track);
+					//Play Audio//
 					//Reset sounds
 					soundManager.stopAll();
 					soundManager.destroySound("current");
@@ -91,40 +108,51 @@ gruve.controller("homeCtrl",
 						whileplaying: function(){
 							//sm object
 							// console.log(this);
-							$(".current-track-position").text(toPositionTime(this.position));
+							// $(".current-track-position").text(toPositionTime(this.position));
+							gruveState.updateCurrentSoundPosition(toPositionTime(this.position));
+						},
+						onstop: function(){
+							gruveState.updateCurrentSoundPosition("0:00");
 						}
-					}).play();
+					});//.play();
+					//
 
-					//Update to show in player
-					updateCurrentTrack(track);
+					//Update current track//
+					track.duration = toPositionTime(track.duration);
+					scope.currentTrack = track;
+					//Update artwork in player
+					$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
+					//
+
 					return track;
 				})
 				.then(function(track){
-					console.log(track, "asd");
 					$(players.playing).modal("setting", "closable", false).modal("show");
-					state.playing = true;
+				})
+				.then(function(){
+					scope.gruveState.getPlayingState("playing");
+					gruveState.playCurrentSound();
 				});
 
 
 		};
 
-		$scope.togglePlay = function(){
-			// if (!$scope.selectedTrack) {
-			// 	console.log("no selectedTrack");
-			// 	return;
-			// }
-			var state = soundManager.getSoundById("current").playState;
-			console.log(state);
-			switch (state) {
-				case "playing":
-					soundManager.getSoundById("current").pause();
-					break;
-				case "paused":
-					soundManager.getSoundById("current").play();
-					break;
-				default:
-					console.log("selectedTrack not playing/paused", state);
+
+		//Playing Optinos
+		scope.playButton = function(){
+			//Prevent mutliple playing of current sound
+			if (!(scope.gruveState.getPlayingState() == "playing")) {
+				gruveState.playCurrentSound();	
+				scope.gruveState.getPlayingState("playing");				
 			};
+		};
+		scope.pauseButton = function(){
+			gruveState.pauseCurrentSound();
+			scope.gruveState.getPlayingState("pause");
+		};
+		scope.stopButton = function(){
+			gruveState.stopCurrentSound();
+			scope.gruveState.getPlayingState("stop");
 		};
 	}
 ])
