@@ -9,7 +9,8 @@ Meteor.startup(function () {
 			credentials: "?client_id=9d3700f41a6e7c052108742a6d661971"
 		},
 		assets: {
-			missingPNG : "images/missing.png"
+			// missingPNG : "images/missing.png"
+			missingPNG: "images/white-brushed.png"
 		}
 	};
 

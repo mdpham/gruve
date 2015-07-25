@@ -8,10 +8,14 @@
 }
 
 /*Artwork*/
-/*img.artwork-icon {
+img.artwork-icon {
 	height: 100px;
 	width: 100px;	
-};*/
+}
+.missing-artwork {
+	background-color: rgb(167,196,21);
+/*	background-image: url("images/white-brushed.png")*/
+}
 /*Waveform Filters*/
 /*Filter styles*/
 .saturate {-webkit-filter: saturate(3);}

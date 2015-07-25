@@ -58,13 +58,15 @@ gruve.controller("homeCtrl",
 				  .sidebar('toggle')
 		};
 		scope.selectPlaylist = function(id) {
-			console.log(scope.playlists, id);
 			$meteor.call("fetchPlaylist", id)
 			//Returns playlist object
 				.then(function(playlist){
 					var tracks = playlist.tracks;
 					_.each(tracks, function(t){
-						if (t.artwork_url == null) {t.artwork_url = config.assets.missingPNG};
+						console.log(t.artwork_url);
+
+						if (t.artwork_url == null) {t.missing_artwork_url = config.assets.missingPNG;}
+						else {t.artwork_url = t.artwork_url.replace("large", "t500x500");}
 					});
 					scope.tracks = playlist.tracks
 				})
@@ -125,6 +127,7 @@ gruve.controller("homeCtrl",
 					track.duration = toPositionTime(track.duration);
 					scope.currentTrack = track;
 					//Update artwork in player
+					if (track.artwork_url) {track.artwork_url = track.artwork_url.replace("large", "t500x500");};
 					$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
 					//
 

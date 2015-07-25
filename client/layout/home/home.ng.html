@@ -29,7 +29,8 @@
 		<div class="column" ng-repeat="track in tracks">
 			<div class="ui card">
 				<div class="small image">
-					<img ng-src="{{track.artwork_url}}">
+					<img ng-src="{{track.artwork_url ? track.artwork_url : track.missing_artwork_url}}"
+					ng-class="{'missing-artwork': !track.artwork_url, olive: !track.artwork_url}">
 				</div>
 				<div class="content">
 					<a class="header">
