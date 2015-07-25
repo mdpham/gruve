@@ -7,6 +7,9 @@ Meteor.startup(function () {
 			tracks: "http://api.soundcloud.com/tracks/",
 			users: "http://api.soundcloud.com/users/",
 			credentials: "?client_id=9d3700f41a6e7c052108742a6d661971"
+		},
+		assets: {
+			missingPNG : "images/missing.png"
 		}
 	};
 

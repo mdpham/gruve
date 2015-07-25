@@ -31,8 +31,7 @@ gruve.controller("homeCtrl",
 		// 			//Song is stopped
 		// 			case "stop":
 		// 				break;
-		// 		}
-				
+		// 		}	
 		// 	}
 		// );
 
@@ -59,18 +58,20 @@ gruve.controller("homeCtrl",
 				  .sidebar('toggle')
 		};
 		scope.selectPlaylist = function(id) {
-			// console.log(scope.playlists, id);
-			var result = _.chain(scope.playlists)
-				.where({'id': id})
-				.first()
-				.value();
-			_.each(result.tracks, function(t){
-				if (t.artwork_url == null) {t.artwork_url = "images/missing.png"}
-			});
-			scope.tracks = result.tracks;
-
-			//Hide playlists
-			scope.togglePlaylists();
+			console.log(scope.playlists, id);
+			$meteor.call("fetchPlaylist", id)
+			//Returns playlist object
+				.then(function(playlist){
+					var tracks = playlist.tracks;
+					_.each(tracks, function(t){
+						if (t.artwork_url == null) {t.artwork_url = config.assets.missingPNG};
+					});
+					scope.tracks = playlist.tracks
+				})
+				.then(function(){
+					//Hide playlist
+					scope.togglePlaylists();
+				});
 		};
 
 		var toPositionTime = function(posn_ms) {
