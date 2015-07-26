@@ -17,7 +17,13 @@ Meteor.startup(function(){
 			missingPNG: "images/white-brushed.png"
 		}
 	};
-
+	var toPositionTime = function(posn_ms) {
+		var minutes = posn_ms/1000/60 << 0;
+		var seconds = ((posn_ms/1000) % 60) << 0;
+		seconds = (seconds < 10 ? "0": "") + seconds;
+		return minutes + ":" + seconds;
+	};
+	
 	Meteor.methods({
 		clearPlaylists: function(){
 			Playlists.remove({});
@@ -47,6 +53,7 @@ Meteor.startup(function(){
 		//For after call to api to get track on scope.selectTrack
 		processTrack: function(track){
 			track.gruve = {
+				duration: toPositionTime(track.duration),
 				artwork_url: !track.artwork_url ? config.assets.missingPNG : track.artwork_url.replace("large", "t500x500"),
 				avatar_url: track.user.avatar_url.replace("large", "t500x500")
 			};
