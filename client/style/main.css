@@ -3,8 +3,12 @@
 	height: 70px;
 }
 
-.tracks-container {
+.content-container {
 	margin-top: 70px !important;
+	/*margin-bottom: 14px !important;*/
+}
+.tracks-container {
+	margin-top: 14px !important;
 	margin-bottom: 14px !important;
 }
 

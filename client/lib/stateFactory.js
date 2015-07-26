@@ -117,7 +117,7 @@ gruve.factory("gruveState", function(){
 		if (soundManager.getSoundById("current").muted) {
 			$(".current-track-mute-status").text("MUTED");
 		} else {
-			$(".current-track-mute-status").text("");
+			$(".current-track-mute-status").text("VOLUME");
 		}
 	};
 	//
