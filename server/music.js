@@ -17,14 +17,15 @@ Meteor.startup(function(){
 			missingPNG: "images/white-brushed.png"
 		}
 	};
+
 	Meteor.methods({
 		clearPlaylists: function(){
 			Playlists.remove({});
 		},
-		fetchPlaylist: function(soundcloud_id){
+		fetchPlaylist: function(soundcloud_playlist_id){
 			//Add error catching
-			console.log(Playlists.findOne({id: soundcloud_id}));
-			var findOne = Playlists.findOne({id: soundcloud_id});
+			console.log(Playlists.findOne({id: soundcloud_playlist_id}));
+			var findOne = Playlists.findOne({id: soundcloud_playlist_id});
 			//Gruve data object for playlist
 			findOne.gruve = {};
 			//Process start and end dates for playlist
@@ -39,9 +40,17 @@ Meteor.startup(function(){
 				if (t.artwork_url == null) {t.gruve.artwork_url = config.assets.missingPNG;}
 				else {t.gruve.artwork_url = t.artwork_url.replace("large", "t500x500");};
 				//User avatar artwork
-				t.gruve.avatar_url = t.user.avatar_url.replace("large", "t500x500");
+				// t.gruve.avatar_url = t.user.avatar_url.replace("large", "t500x500");
 			});
 			return findOne;
+		},
+		//For after call to api to get track on scope.selectTrack
+		processTrack: function(track){
+			track.gruve = {
+				artwork_url: !track.artwork_url ? config.assets.missingPNG : track.artwork_url.replace("large", "t500x500"),
+				avatar_url: track.user.avatar_url.replace("large", "t500x500")
+			};
+			return track;
 		}
 
 	})

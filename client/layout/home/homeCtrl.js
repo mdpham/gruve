@@ -118,12 +118,22 @@ gruve.controller("homeCtrl",
 			//SoundManager config for waveform
 			soundManager.setup({flashVersion: 9});
 
-			//Get track
+			//Get track //move to serverside
 			var promise = $http.get(config.api.tracks+id+config.api.credentials);
 			promise
+				//Process track
 				.then(function(result){
-					// console.log(result)
 					var track = result.data;
+					$meteor.call("processTrack", result.data)
+						.then(function(processed_track){
+							gruveState.updateArtworkAvatarImages(processed_track);
+							scope.currentTrack = processed_track;
+							track = processed_track;
+						})
+					return track;
+				})
+				//Load track into soundManager2
+				.then(function(track){
 					console.log(track);
 					//Play Audio//
 					//Reset sounds
@@ -134,36 +144,16 @@ gruve.controller("homeCtrl",
 						id: "current",
 						url: track.stream_url + "?client_id="+config.client_id,
 						whileplaying: function(){
-							//sm object
-							// console.log(this);
-							// $(".current-track-position").text(toPositionTime(this.position));
-							gruveState.updateCurrentSoundPosition(toPositionTime(this.position));
+							//'this' provides soundManager sound object
+							gruveState.updateCurrentSoundPosition(this.position);
 						},
 						onstop: function(){
-							gruveState.updateCurrentSoundPosition("0:00");
+							gruveState.updateCurrentSoundPosition(0);
 						}
 					});//.play();
 					//
-
-					//Update current track//
-					track.duration = toPositionTime(track.duration);
-					scope.currentTrack = track;
-					//Update artwork in player
-					if (track.artwork_url) {track.artwork_url = track.artwork_url.replace("large", "t500x500");};
-					$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
-					$("img.current-avatar").attr("src", track.user.avatar_url.replace("large", "t500x500"));
-
-					//Update permalinks to user and track pages on soundcloud
-					$("a.current-avatar-href").attr("href", track.user.permalink_url);
-					$("a.current-artwork-href").attr("href", track.permalink_url);
-					//
-
-					return track;
 				})
-				.then(function(track){
-					//dont open player
-					// $(players.playing).modal("setting", "closable", false).modal("show");
-				})
+				//Change state and play
 				.then(function(){
 					scope.gruveState.getPlayingState("playing");
 					gruveState.playCurrentSound();

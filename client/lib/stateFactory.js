@@ -47,10 +47,25 @@ gruve.factory("gruveState", function(){
 		soundManager.stop("current");
 		return (soundManager.getSoundById("current"));
 	};
-	gruveState.updateCurrentSoundPosition = function(posn){
+	//Updates current player position with format "MM:SS"
+	gruveState.updateCurrentSoundPosition = function(posn_ms){
+		var minutes = posn_ms/1000/60 << 0;
+		var seconds = ((posn_ms/1000) % 60) << 0;
+		seconds = (seconds < 10 ? "0": "") + seconds;
+		var posn = minutes + ":" + seconds;
 		//Formatted with toPositionTime
 		$(".current-track-position").text(posn);
 	};
-
+	//Update current artwork and avatar images
+	gruveState.updateArtworkAvatarImages = function(track) {
+		//Should be processed track//
+		//Update artwork in player
+		$("img.current-artwork").attr("src", track.gruve.artwork_url);
+		$("img.current-avatar").attr("src", track.gruve.avatar_url);
+		//Update permalinks to user and track pages on soundcloud
+		$("a.current-avatar-href").attr("href", track.user.permalink_url);
+		$("a.current-artwork-href").attr("href", track.permalink_url);
+		//
+	};
 	return (gruveState);
 });
