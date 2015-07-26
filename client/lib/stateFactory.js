@@ -39,9 +39,6 @@ gruve.factory("gruveState", function(){
 		getPlayerState: function(state){
 			if (state) {this.player = state;};
 			return (this.player);
-		},
-		getMuteStatus: function(){
-			return soundManager.getSoundById("current").muted;
 		}
 	};
 
@@ -118,9 +115,9 @@ gruve.factory("gruveState", function(){
 	gruveState.volumeMute = function() {
 		soundManager.getSoundById("current").toggleMute();
 		if (soundManager.getSoundById("current").muted) {
-			// $(".current-track-mute-status").text("MUTED");
+			$(".current-track-mute-status").text("MUTED");
 		} else {
-			// $(".current-track-mute-status").text("");
+			$(".current-track-mute-status").text("");
 		}
 	};
 	//
