@@ -22,7 +22,7 @@
 		<div class="item" ng-show="currentTrack">
 			<meteor-include src="menu-player"></meteor-include>
 		</div>
-		<a href="https://soundcloud.com" class="item">
+		<a href="https://soundcloud.com" target="_blank" class="item">
 			<i class="big orange soundcloud icon"></i>
 		</a>
 	</div>
@@ -60,7 +60,7 @@
 						<a ng-click="selectTrack(track.id)">Play</a>
 					</span>
 					<span class="right floated">
-						<a ng-href="{{track.permalink_url}}">See More</a>
+						<a ng-href="{{track.permalink_url}}" target="_blank">See More</a>
 					</span>
 				</div>
 			</div>

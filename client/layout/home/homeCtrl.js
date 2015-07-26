@@ -134,7 +134,7 @@ gruve.controller("homeCtrl",
 					//Update artwork in player
 					if (track.artwork_url) {track.artwork_url = track.artwork_url.replace("large", "t500x500");};
 					$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
-					$("img.current-avatar").attr("src", track.user.avatar_url);
+					$("img.current-avatar").attr("src", track.user.avatar_url.replace("large", "t500x500"));
 
 					//Update permalinks to user and track pages on soundcloud
 					$("a.current-avatar-href").attr("href", track.user.permalink_url);
@@ -144,7 +144,7 @@ gruve.controller("homeCtrl",
 					return track;
 				})
 				.then(function(track){
-					$(players.playing).modal("setting", "closable", false).modal("show");
+					// $(players.playing).modal("setting", "closable", false).modal("show");
 				})
 				.then(function(){
 					scope.gruveState.getPlayingState("playing");
