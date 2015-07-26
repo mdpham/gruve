@@ -1,17 +1,49 @@
 <!-- PLAYER Information in top menu of main content -->
 <template name="menu-player">
 <div class="ui large buttons">
-  <button class="ui button">
+  <button class="ui current-track-title-button button">
     <span ng-bind="currentTrack.title"></span>
   </button>
   <div class="or" data-text="by"></div>
-  <button class="ui button">
+  <button class="ui current-track-username-button button">
   	<span ng-bind="currentTrack.user.username"></span>
   </button>
   <div class="or" data-text="at"></div>
-  <button class="ui button">
+  <button class="ui current-track-position-button button">
   	<span class="current-track-position"></span>/<span ng-bind="currentTrack.duration"></span>
   </button>
+</div>
+
+<!-- Popups -->
+<div class="ui orange current-track-title-popup popup">
+  <!-- Classes for changing url in selectTrack -->
+  <a class="current-avatar-href" target="_blank">
+    <img class="current-avatar">
+  </a>
+</div>
+<div class="ui orange current-track-username-popup popup">
+  <a class="current-artwork-href" target="_blank">
+    <img class="current-artwork">
+  </a>
+</div>
+<div class="ui inverted current-track-position-popup popup">
+  <div class="fluid ui three icon buttons">
+    <button class="ui red basic inverted button" 
+      ng-click="stopButton()"
+      ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
+      <i class="stop icon"></i>
+    </button>
+    <button class="ui yellow basic inverted button" 
+      ng-click="pauseButton()"
+      ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
+      <i class="pause icon"></i>
+    </button>
+      <button class="ui green basic inverted button" 
+      ng-click="playButton()"
+      ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
+      <i class="play icon"></i>
+    </button>
+  </div>
 </div>
 </template>
 <!-- @end PLAYER -->

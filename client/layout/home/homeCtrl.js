@@ -63,7 +63,7 @@ gruve.controller("homeCtrl",
 				.then(function(playlist){
 					var tracks = playlist.tracks;
 					_.each(tracks, function(t){
-						console.log(t.artwork_url);
+						// console.log(t.artwork_url);
 
 						if (t.artwork_url == null) {t.missing_artwork_url = config.assets.missingPNG;}
 						else {t.artwork_url = t.artwork_url.replace("large", "t500x500");}
@@ -74,6 +74,11 @@ gruve.controller("homeCtrl",
 					//Hide playlist
 					scope.togglePlaylists();
 				});
+			// console.log(scope.playlists);
+			// var result = _.find(scope.playlists, function(p) {return p.id == id});
+			// console.log(result);
+			// scope.tracks = result.tracks;
+			// scope.togglePlaylists();
 		};
 
 		var toPositionTime = function(posn_ms) {
@@ -129,6 +134,11 @@ gruve.controller("homeCtrl",
 					//Update artwork in player
 					if (track.artwork_url) {track.artwork_url = track.artwork_url.replace("large", "t500x500");};
 					$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
+					$("img.current-avatar").attr("src", track.user.avatar_url);
+
+					//Update permalinks to user and track pages on soundcloud
+					$("a.current-avatar-href").attr("href", track.user.permalink_url);
+					$("a.current-artwork-href").attr("href", track.permalink_url);
 					//
 
 					return track;
