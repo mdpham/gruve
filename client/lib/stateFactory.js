@@ -1,5 +1,19 @@
 //Custom type
 gruve.factory("gruveState", function(){
+	config = {
+		client_id: "9d3700f41a6e7c052108742a6d661971",
+		username: "phamartin", //user_id: 49699208git
+		api: {
+			base: "http://api.soundcloud.com",
+			tracks: "http://api.soundcloud.com/tracks/",
+			users: "http://api.soundcloud.com/users/",
+			credentials: "?client_id=9d3700f41a6e7c052108742a6d661971"
+		},
+		assets: {
+			// missingPNG : "images/missing.png"
+			missingPNG: "images/white-brushed.png"
+		}
+	};
 	//Constructor
 	function gruveState(audioState, playingState, playerState){
 		//Audio is loaded
@@ -29,6 +43,26 @@ gruve.factory("gruveState", function(){
 	};
 
 	//Static methods, no access to 'this' reference//
+	//Loads a track into soundManager2
+	gruveState.loadSound = function(track) {
+		//Play Audio//
+		//Reset sounds
+		soundManager.stopAll();
+		soundManager.destroySound("current");
+		//Play
+		soundManager.createSound({
+			id: "current",
+			url: track.stream_url + "?client_id="+config.client_id,
+			whileplaying: function(){
+				//'this' provides soundManager sound object
+				gruveState.updateCurrentSoundPosition(this.position);
+			},
+			onstop: function(){
+				gruveState.updateCurrentSoundPosition(0);
+			}
+		});
+		//
+	};
 	//Play current sound loaded in soundManager
 	gruveState.playCurrentSound = function() {
 		// soundManager.getSoundById("current").play();

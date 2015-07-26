@@ -135,23 +135,7 @@ gruve.controller("homeCtrl",
 				//Load track into soundManager2
 				.then(function(track){
 					console.log(track);
-					//Play Audio//
-					//Reset sounds
-					soundManager.stopAll();
-					soundManager.destroySound("current");
-					//Play
-					soundManager.createSound({
-						id: "current",
-						url: track.stream_url + "?client_id="+config.client_id,
-						whileplaying: function(){
-							//'this' provides soundManager sound object
-							gruveState.updateCurrentSoundPosition(this.position);
-						},
-						onstop: function(){
-							gruveState.updateCurrentSoundPosition(0);
-						}
-					});//.play();
-					//
+					gruveState.loadSound(track);
 				})
 				//Change state and play
 				.then(function(){
