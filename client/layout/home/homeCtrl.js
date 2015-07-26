@@ -142,8 +142,6 @@ gruve.controller("homeCtrl",
 					scope.gruveState.getPlayingState("playing");
 					gruveState.playCurrentSound();
 				});
-
-
 		};
 
 

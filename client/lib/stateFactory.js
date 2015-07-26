@@ -45,14 +45,14 @@ gruve.factory("gruveState", function(){
 	//Static methods, no access to 'this' reference//
 	//Loads a track into soundManager2
 	gruveState.loadSound = function(track) {
-		//Play Audio//
 		//Reset sounds
 		soundManager.stopAll();
 		soundManager.destroySound("current");
-		//Play
+		//Create sound
 		soundManager.createSound({
 			id: "current",
 			url: track.stream_url + "?client_id="+config.client_id,
+			volume: 50,
 			whileplaying: function(){
 				//'this' provides soundManager sound object
 				gruveState.updateCurrentSoundPosition(this.position);
