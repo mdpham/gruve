@@ -30,6 +30,9 @@
 
 <!-- CONTENT: TRACKS	-->
 <div class="ui container content-container">
+	<div class="ui five column stackable grid landing-container" ng-show="!tracks">
+		no tracks
+	</div>
 	<div class="ui five column stackable grid tracks-container">
 		<div class="column" ng-repeat="track in tracks">
 			<div class="ui card">

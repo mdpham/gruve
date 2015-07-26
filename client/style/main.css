@@ -7,7 +7,7 @@
 	margin-top: 70px !important;
 	/*margin-bottom: 14px !important;*/
 }
-.tracks-container {
+.tracks-container, .landing-container {
 	margin-top: 14px !important;
 	margin-bottom: 14px !important;
 }

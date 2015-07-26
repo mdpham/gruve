@@ -107,7 +107,7 @@ gruve.factory("gruveState", function(){
 		soundManager.getSoundById("current").setVolume(volume);
 	};
 	gruveState.volumeDown = function() {
-		var volume = Math.max(0,
+		var volume = Math.max(1,
 			soundManager.getSoundById("current").volume - 7
 		)
 		soundManager.getSoundById("current").setVolume(volume);
