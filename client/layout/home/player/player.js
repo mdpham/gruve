@@ -1,6 +1,4 @@
 Template['menu-player'].rendered = function(){
-	console.log("menu-player rendered");
-
 	//Track Title
 	$(".current-track-title-button").popup({
 		popup: $(".current-track-title-popup"),

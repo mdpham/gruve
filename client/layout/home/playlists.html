@@ -1,6 +1,12 @@
 <!-- PLAYLISTS DROPDOWN MENU -->
 <template name="playlists">
-<div class="ui fluid olive inverted segment playlist-container">
+<!-- Current -->
+<div class="ui fluid segment current-playlist-container">
+	<img ng-src="currentPlaylistIntervalArtwork">
+
+</div>
+<!-- List -->
+<div class="ui fluid segment playlist-container">
 	<div class="ui four column stackable double grid">
 		<div class="column" ng-repeat="playlist in playlists">
 			<a class="ui button" ng-click="selectPlaylist(playlist.id)">

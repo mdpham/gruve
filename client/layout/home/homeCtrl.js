@@ -57,6 +57,7 @@ gruve.controller("homeCtrl",
 				  .sidebar('setting', 'transition', 'overlay')
 				  .sidebar('toggle')
 		};
+		scope.currentPlaylist;
 		scope.selectPlaylist = function(id) {
 			$meteor.call("fetchPlaylist", id)
 			//Returns playlist object
@@ -68,17 +69,19 @@ gruve.controller("homeCtrl",
 						if (t.artwork_url == null) {t.missing_artwork_url = config.assets.missingPNG;}
 						else {t.artwork_url = t.artwork_url.replace("large", "t500x500");}
 					});
-					scope.tracks = playlist.tracks
+					scope.currentPlaylist = playlist;
+					// console.log(playlist);
+					scope.tracks = playlist.tracks;
+					return playlist;
+				})
+				.then(function(playlist){
+					console.log(playlist);
+					
 				})
 				.then(function(){
 					//Hide playlist
 					scope.togglePlaylists();
-				});
-			// console.log(scope.playlists);
-			// var result = _.find(scope.playlists, function(p) {return p.id == id});
-			// console.log(result);
-			// scope.tracks = result.tracks;
-			// scope.togglePlaylists();
+				})
 		};
 
 		var toPositionTime = function(posn_ms) {
@@ -86,14 +89,6 @@ gruve.controller("homeCtrl",
 			var seconds = ((posn_ms/1000) % 60) << 0;
 			seconds = (seconds < 10 ? "0": "") + seconds;
 			return minutes + ":" + seconds;
-		};
-		var updateCurrentTrack = function(track){
-			console.log(track);
-			track.duration = toPositionTime(track.duration);
-			scope.currentTrack = track;
-			//Update artwork in player
-			console.log(track.artwork_url);
-			$("img.current-artwork").attr("src", !track.artwork_url ? "images/missing.png" : track.artwork_url);
 		};
 
 		scope.selectTrack = function(id){
@@ -105,7 +100,7 @@ gruve.controller("homeCtrl",
 			var promise = $http.get(config.api.tracks+id+config.api.credentials);
 			promise
 				.then(function(result){
-					console.log(result)
+					// console.log(result)
 					var track = result.data;
 					console.log(track);
 					//Play Audio//
@@ -144,6 +139,7 @@ gruve.controller("homeCtrl",
 					return track;
 				})
 				.then(function(track){
+					//dont open player
 					// $(players.playing).modal("setting", "closable", false).modal("show");
 				})
 				.then(function(){
