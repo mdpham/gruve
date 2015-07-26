@@ -2,20 +2,26 @@
 .main-menu-container {
 	height: 70px;
 }
+
 .tracks-container {
 	margin-top: 70px !important;
 	margin-bottom: 14px !important;
 }
 
 /*Artwork*/
-img.artwork-icon {
-	height: 100px;
-	width: 100px;	
+img.artwork {
+	background-color: rgb(167,196,21);
 }
 .missing-artwork {
 	background-color: rgb(167,196,21);
 /*	background-image: url("images/white-brushed.png")*/
 }
+
+/*img.playlist-interval-artwork {
+	height: 200px;
+	width: 200px;
+}*/
+
 /*Waveform Filters*/
 /*Filter styles*/
 .saturate {-webkit-filter: saturate(3);}

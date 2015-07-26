@@ -1,6 +1,6 @@
 gruve.controller("homeCtrl",
-	["$scope","$meteor","$http","gruveState",
-	function($scope, $meteor, $http, gruveState){
+	["$scope","$meteor","$http","$interval", "gruveState",
+	function($scope, $meteor, $http, $interval, gruveState){
 		scope = $scope;
 
 		//Playlists
@@ -52,7 +52,6 @@ gruve.controller("homeCtrl",
 		};
 
 		scope.togglePlaylists = function(){
-			// $("div.playlist-container").transition("slide down");
 			$(".sidebar.playlists-topbar")
 				  .sidebar('setting', 'transition', 'overlay')
 				  .sidebar('toggle')
@@ -61,26 +60,49 @@ gruve.controller("homeCtrl",
 		scope.selectPlaylist = function(id) {
 			$meteor.call("fetchPlaylist", id)
 			//Returns playlist object
+				//Process for artwork
+				.then(function(processed_playlist){
+					console.log("processed", processed_playlist);
+					return processed_playlist;
+				})
 				.then(function(playlist){
 					var tracks = playlist.tracks;
 					_.each(tracks, function(t){
-						// console.log(t.artwork_url);
-
+						// console.log(t);
 						if (t.artwork_url == null) {t.missing_artwork_url = config.assets.missingPNG;}
 						else {t.artwork_url = t.artwork_url.replace("large", "t500x500");}
 					});
+					return playlist;
+				})
+				//Get "From" and "To" date
+				.then(function(playlist){
+					//Expect "[mm.dd.yy]"
+					var start = moment(playlist.title.substring(1,9), "MM.DD.YY");
+					playlist.fromDate = start.format("ll");
+					playlist.toDate = start.add(1, "weeks").format("ll");
+					return playlist;
+				})
+				//Load into scope
+				.then(function(playlist){
 					scope.currentPlaylist = playlist;
-					// console.log(playlist);
-					scope.tracks = playlist.tracks;
 					return playlist;
 				})
 				.then(function(playlist){
-					console.log(playlist);
-					
-				})
-				.then(function(){
 					//Hide playlist
 					scope.togglePlaylists();
+
+					scope.tracks = scope.currentPlaylist.tracks;
+					return playlist;
+				})
+				.then(function(playlist){
+					$interval.cancel(scope.intervalArtwork);
+					scope.intervalArtwork = $interval(function(){
+						// console.log("interval", _.sample(_.pluck(playlist.tracks, "artwork_url")));
+						$("img.playlist-interval-artwork").attr("src", _.sample(_.pluck(playlist.tracks, "artwork_url")));
+						// scope.tracks = _.shuffle(scope.tracks);
+					}, 2000);
+
+
 				})
 		};
 
@@ -90,7 +112,7 @@ gruve.controller("homeCtrl",
 			seconds = (seconds < 10 ? "0": "") + seconds;
 			return minutes + ":" + seconds;
 		};
-
+		scope.currentTrack;
 		scope.selectTrack = function(id){
 			scope.gruveState.getAudioState(true);
 			//SoundManager config for waveform
