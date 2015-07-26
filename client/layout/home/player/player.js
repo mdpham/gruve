@@ -14,8 +14,9 @@ Template['menu-player'].rendered = function(){
 	//Track Position
 	$(".current-track-position-button").popup({
 		popup: $(".current-track-position-popup"),
-		on: "hover",
-		hoverable: true,
+		// on: "hover",
+		// hoverable: true,
+		on: "click",
 		position: "bottom right"
 	});
 };

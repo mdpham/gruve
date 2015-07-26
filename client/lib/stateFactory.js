@@ -39,6 +39,9 @@ gruve.factory("gruveState", function(){
 		getPlayerState: function(state){
 			if (state) {this.player = state;};
 			return (this.player);
+		},
+		getMuteStatus: function(){
+			return soundManager.getSoundById("current").muted;
 		}
 	};
 
@@ -53,9 +56,11 @@ gruve.factory("gruveState", function(){
 			id: "current",
 			url: track.stream_url + "?client_id="+config.client_id,
 			volume: 50,
+			//Tracks track position and volume
 			whileplaying: function(){
 				//'this' provides soundManager sound object
 				gruveState.updateCurrentSoundPosition(this.position);
+				gruveState.updateCurrentSoundVolume();
 			},
 			onstop: function(){
 				gruveState.updateCurrentSoundPosition(0);
@@ -63,6 +68,7 @@ gruve.factory("gruveState", function(){
 		});
 		//
 	};
+	//PLAYING OPTIONS
 	//Play current sound loaded in soundManager
 	gruveState.playCurrentSound = function() {
 		// soundManager.getSoundById("current").play();
@@ -81,6 +87,7 @@ gruve.factory("gruveState", function(){
 		soundManager.stop("current");
 		return (soundManager.getSoundById("current"));
 	};
+	//
 	//Updates current player position with format "MM:SS"
 	gruveState.updateCurrentSoundPosition = function(posn_ms){
 		var minutes = posn_ms/1000/60 << 0;
@@ -90,6 +97,33 @@ gruve.factory("gruveState", function(){
 		//Formatted with toPositionTime
 		$(".current-track-position").text(posn);
 	};
+	//VOLUME OPTIONS//
+	//Update current player volume with format "x.xx"
+	gruveState.updateCurrentSoundVolume = function(){
+		var volume = (soundManager.getSoundById("current").volume/100).toFixed(2);
+		$(".current-track-volume").text(volume);
+	};
+	gruveState.volumeUp = function() {
+		var volume = Math.min(100,
+			soundManager.getSoundById("current").volume + 7
+		)
+		soundManager.getSoundById("current").setVolume(volume);
+	};
+	gruveState.volumeDown = function() {
+		var volume = Math.max(0,
+			soundManager.getSoundById("current").volume - 7
+		)
+		soundManager.getSoundById("current").setVolume(volume);
+	};
+	gruveState.volumeMute = function() {
+		soundManager.getSoundById("current").toggleMute();
+		if (soundManager.getSoundById("current").muted) {
+			// $(".current-track-mute-status").text("MUTED");
+		} else {
+			// $(".current-track-mute-status").text("");
+		}
+	};
+	//
 	//Update current artwork and avatar images
 	gruveState.updateArtworkAvatarImages = function(track) {
 		//Should be processed track//

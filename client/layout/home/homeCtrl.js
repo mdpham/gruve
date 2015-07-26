@@ -145,7 +145,7 @@ gruve.controller("homeCtrl",
 		};
 
 
-		//Playing Optinos
+		//PLAYING OPTIONS//
 		scope.playButton = function(){
 			//Prevent mutliple playing of current sound
 			if (!(scope.gruveState.getPlayingState() == "playing")) {
@@ -161,5 +161,19 @@ gruve.controller("homeCtrl",
 			gruveState.stopCurrentSound();
 			scope.gruveState.getPlayingState("stop");
 		};
+		//
+
+		//VOLUME OPTIONS//
+		scope.volumeUpButton = function(){
+			gruveState.volumeUp();
+		};
+		scope.volumeDownButton = function(){
+			gruveState.volumeDown();
+		};
+		scope.volumeMuteButton = function(){
+			gruveState.volumeMute();
+		};
+		//
+
 	}
 ])

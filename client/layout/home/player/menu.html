@@ -15,20 +15,22 @@
 </div>
 
 <!-- Popups -->
+<!-- Track popup -->
 <div class="ui orange current-track-title-popup popup">
   <!-- Classes for changing url in selectTrack -->
   <a class="current-artwork-href" target="_blank" ng-click="pauseButton()">
     <img class="current-artwork">
   </a>
 </div>
+<!-- Artist popup -->
 <div class="ui orange current-track-username-popup popup">
   <a class="current-avatar-href" target="_blank" ng-click="pauseButton()">
     <img class="current-avatar">
   </a>
 </div>
-
+<!-- Position popup -->
 <div class="ui inverted current-track-position-popup popup">
-  <div class="fluid ui three icon buttons">
+  <div class="fluid ui three large icon buttons">
     <button class="ui red basic inverted button" 
       ng-click="stopButton()"
       ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
@@ -45,6 +47,48 @@
       <i class="play icon"></i>
     </button>
   </div>
+  <!--  -->
+  <div class="ui divider"></div>
+  <!--  -->
+  <div class="ui inverted segment">
+<!--     <div class="ui pointing below label">
+      <span class="current-track-volume"></span>
+      <span class="current-track-mute-status"></span>
+    </div> -->
+    <div class="ui inverted large horizontal statistic">
+        <div class="text value"><span class="current-track-volume"></span></div>
+        <div class="label">
+        <i class="current-track-mute-status volume icon" ng-class="gruveState.getMuteStatus() ? 'off' : 'up'"></i>
+        </div>
+    </div>
+
+
+    <!-- <div class="ui divider"></div> -->
+    <div class="fluid ui three large buttons">
+      <button class="ui basic inverted icon button" ng-click="volumeDownButton()">
+        <i class="large icons">
+          <i class="volume up icon"></i>
+          <i class="blue corner minus icon"></i>
+        </i>
+      </button>
+      <button class="ui basic inverted icon button" ng-click="volumeUpButton()">
+        <i class="large icons">
+          <i class="volume up icon"></i>
+          <i class="blue corner plus icon"></i>
+        </i>
+      </button>
+      <button class="ui basic inverted icon button" ng-click="volumeMuteButton()">
+        <i class="large icons">
+          <i class="volume up icon"></i>
+          <i class="grey large dont icon"></i>
+        </i>
+      </button>
+    </div>
+  </div>
+  <!--  -->
+  <div class="ui divider"></div>
+  <!--  -->
+
 </div>
 </template>
 <!-- @end PLAYER -->
