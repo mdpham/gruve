@@ -1,7 +1,11 @@
 gruve.controller("homeCtrl",
-	["$scope","$meteor","$http","$interval", "gruveState",
-	function($scope, $meteor, $http, $interval, gruveState){
+	["$scope","$meteor","$http","$interval", "gruveState", "modalPlayers",
+	function($scope, $meteor, $http, $interval, gruveState, modalPlayers){
 		scope = $scope;
+		//STATE WATCHING//
+		//gruveState starts with no playing and no player open
+		scope.gruveState = new gruveState(false, "stop", false);
+
 
 		//Playlists
 		scope.playlists = $meteor.collection(Playlists);
@@ -12,42 +16,21 @@ gruve.controller("homeCtrl",
 			});
 		});
 
-		//STATE WATCHING//
-		//State starts with no playing and no player open
-		scope.gruveState = new gruveState(false, "stop", false);
-		//	On $digest(); State variable in scope.state is changed and then $digest() called
-		//Playing
-		// scope.$watch(
-		// 	function(){return scope.gruveState.getPlayingState()},
-		// 	function(newPlayingState, oldPlayingState){
-		// 		switch(newPlayingState) {
-		// 			//Song is playing
-		// 			case "play":
-		// 				console.log(scope.currentTrack);
-		// 				break;
-		// 			//Song is paused
-		// 			case "plause":
-		// 				break;
-		// 			//Song is stopped
-		// 			case "stop":
-		// 				break;
-		// 		}	
-		// 	}
-		// );
-
+		//consider moving into factory
 		var players = {
 			all: ".ui.basic.fullscreen.modal.player.playing",
 			playing: ".ui.basic.fullscreen.modal.player.playing",
 			idle: ".ui.basic.fullscreen.modal.player.idle"
 		};
-
 		scope.togglePlayer = function(){
 			//Start Discovering
 			$(players.all).modal("hide");
 			if (!scope.gruveState.getAudioState()) {
-				$(players.idle).modal("show");
+				// $(players.idle).modal("show");
+				modalPlayers.showIdle();
 			} else {
-				$(players.playing).modal("show");
+				// $(players.playing).modal("show");
+				modalPlayers.showPlaying();
 			}
 		};
 
@@ -56,7 +39,7 @@ gruve.controller("homeCtrl",
 				  .sidebar('setting', 'transition', 'overlay')
 				  .sidebar('toggle')
 		};
-		scope.currentPlaylist;
+		scope.currentPlaylist, scope.tracks;
 		scope.selectPlaylist = function(id) {
 			$meteor.call("fetchPlaylist", id)
 			//Returns playlist object
@@ -65,32 +48,16 @@ gruve.controller("homeCtrl",
 					console.log("processed", processed_playlist);
 					return processed_playlist;
 				})
+				//Load playlist into scope
 				.then(function(playlist){
-					var tracks = playlist.tracks;
-					_.each(tracks, function(t){
-						// console.log(t);
-						if (t.artwork_url == null) {t.missing_artwork_url = config.assets.missingPNG;}
-						else {t.artwork_url = t.artwork_url.replace("large", "t500x500");}
-					});
-					return playlist;
-				})
-				//Get "From" and "To" date
-				.then(function(playlist){
-					//Expect "[mm.dd.yy]"
-					var start = moment(playlist.title.substring(1,9), "MM.DD.YY");
-					playlist.fromDate = start.format("ll");
-					playlist.toDate = start.add(1, "weeks").format("ll");
-					return playlist;
-				})
-				//Load into scope
-				.then(function(playlist){
+					console.log("playlist in scope", playlist);
 					scope.currentPlaylist = playlist;
 					return playlist;
 				})
 				.then(function(playlist){
 					//Hide playlist
 					scope.togglePlaylists();
-
+					//Load tracks into scope to show in main content page
 					scope.tracks = scope.currentPlaylist.tracks;
 					return playlist;
 				})
@@ -106,12 +73,6 @@ gruve.controller("homeCtrl",
 				})
 		};
 
-		var toPositionTime = function(posn_ms) {
-			var minutes = posn_ms/1000/60 << 0;
-			var seconds = ((posn_ms/1000) % 60) << 0;
-			seconds = (seconds < 10 ? "0": "") + seconds;
-			return minutes + ":" + seconds;
-		};
 		scope.currentTrack;
 		scope.selectTrack = function(id){
 			scope.gruveState.getAudioState(true);
@@ -165,6 +126,8 @@ gruve.controller("homeCtrl",
 		//
 
 		//VOLUME OPTIONS//
+		scope.muteStatus = false;
+		scope.volumeLevel;
 		scope.volumeUpButton = function(){
 			gruveState.volumeUp();
 		};
@@ -176,5 +139,12 @@ gruve.controller("homeCtrl",
 		};
 		//
 
+
+		// var toPositionTime = function(posn_ms) {
+		// 	var minutes = posn_ms/1000/60 << 0;
+		// 	var seconds = ((posn_ms/1000) % 60) << 0;
+		// 	seconds = (seconds < 10 ? "0": "") + seconds;
+		// 	return minutes + ":" + seconds;
+		// };
 	}
 ])

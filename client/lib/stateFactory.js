@@ -1,4 +1,19 @@
 //Custom type
+gruve.factory("modalPlayers", function(){
+	function modalPlayers(){
+		this.all = ".ui.basic.fullscreen.modal.player.playing";
+		this.playing = ".ui.basic.fullscreen.modal.player.playing";
+		this.idle = ".ui.basic.fullscreen.modal.player.idle";
+	};
+
+	modalPlayers.showIdle = function(){
+		$(".ui.basic.fullscreen.modal.player.idle").modal("show");
+	};
+	modalPlayers.showPlaying = function(){
+		$(".ui.basic.fullscreen.modal.player.playing").modal("show");
+	};
+	return (modalPlayers);
+});
 gruve.factory("gruveState", function(){
 	config = {
 		client_id: "9d3700f41a6e7c052108742a6d661971",
