@@ -136,6 +136,7 @@ gruve.controller("homeCtrl",
 				.then(function(track){
 					console.log(track);
 					gruveState.loadSound(track);
+					scope.muteStatus = false;
 				})
 				//Change state and play
 				.then(function(){
@@ -171,7 +172,7 @@ gruve.controller("homeCtrl",
 			gruveState.volumeDown();
 		};
 		scope.volumeMuteButton = function(){
-			gruveState.volumeMute();
+			scope.muteStatus = gruveState.volumeMute();
 		};
 		//
 

@@ -105,20 +105,18 @@ gruve.factory("gruveState", function(){
 			soundManager.getSoundById("current").volume + 7
 		)
 		soundManager.getSoundById("current").setVolume(volume);
+		gruveState.updateCurrentSoundVolume();
 	};
 	gruveState.volumeDown = function() {
 		var volume = Math.max(1,
 			soundManager.getSoundById("current").volume - 7
 		)
 		soundManager.getSoundById("current").setVolume(volume);
+		gruveState.updateCurrentSoundVolume();
 	};
 	gruveState.volumeMute = function() {
 		soundManager.getSoundById("current").toggleMute();
-		if (soundManager.getSoundById("current").muted) {
-			$(".current-track-mute-status").text("MUTED");
-		} else {
-			$(".current-track-mute-status").text("VOLUME");
-		}
+		return soundManager.getSoundById("current").muted;
 	};
 	//
 	//Update current artwork and avatar images
