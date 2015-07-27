@@ -30,8 +30,10 @@
 
 <!-- CONTENT: TRACKS	-->
 <div class="ui content-container">
-	<div class="ui five column stackable grid landing-container" ng-show="!tracks">
-		<div class="column">no tracks</div>
+	<div class="ui one column grid landing-container" ng-show="!tracks">
+		<div class="column">
+		<meteor-include src="landing"></meteor-include>
+		</div>
 	</div>
 	<div class="ui five column stackable grid tracks-container">
 		<div class="column" ng-repeat="track in tracks">

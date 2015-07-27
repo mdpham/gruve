@@ -1,10 +1,21 @@
+/*UI-VIEW*/
+.gruve {
+	height: 100%;
+}
+/*Pusher element: includes Menu and Content*/
+.pusher {
+	height: 100%
+}
 /*MENU*/
 .main-menu-container {
 	height: 70px;
 }
 
+/*CONTENT*/
 .content-container {
-	margin-top: 70px !important;
+	height: 100%;
+	overflow-y: scroll;
+	padding-top: 70px !important;
 	/*margin-bottom: 14px !important;*/
 	/*background-color: orange;*/
 	background-color: rgb(209,84,22);
@@ -12,9 +23,13 @@
 	background-repeat: repeat;
 }
 .tracks-container, .landing-container {
-	margin-top: 14px !important;
-	margin-bottom: 14px !important;
+	padding-bottom: 14px !important;
+	margin-left: 14px !important;
+	margin-right: 14px !important;
 }
+/**/
+
+
 
 /*Artwork*/
 img.artwork {
