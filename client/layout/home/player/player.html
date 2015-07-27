@@ -5,15 +5,91 @@
   <!-- Player -->
   <div class="header">
     <div class="ui grid">
+      
       <div class="four wide column">
-      </div>    
-      <div class="nine wide column">
         <h1 class="large ui left aligned inverted header">
           Listening to...
         </h1>
       </div>
       <div class="three wide column">
-        4
+        <!-- PLAYER OPTIONS -->
+        <div class="fluid ui three large icon buttons">
+          <button class="ui red basic inverted button" 
+            ng-click="stopButton()"
+            ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
+            <i class="stop icon"></i>
+          </button>
+          <button class="ui yellow basic inverted button" 
+            ng-click="pauseButton()"
+            ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
+            <i class="pause icon"></i>
+          </button>
+            <button class="ui green basic inverted button" 
+            ng-click="playButton()"
+            ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
+            <i class="play icon"></i>
+          </button>
+        </div>
+      </div>
+      <div class="three wide column">
+        <!-- PLAYER OPTIONS -->
+        <div class="fluid ui three large icon buttons">
+          <button class="ui red basic inverted button" 
+            ng-click="stopButton()"
+            ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
+            <i class="stop icon"></i>
+          </button>
+          <button class="ui yellow basic inverted button" 
+            ng-click="pauseButton()"
+            ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
+            <i class="pause icon"></i>
+          </button>
+            <button class="ui green basic inverted button" 
+            ng-click="playButton()"
+            ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
+            <i class="play icon"></i>
+          </button>
+        </div>
+      </div>
+      <div class="three wide column">
+        <!-- PLAYER OPTIONS -->
+        <div class="fluid ui three large icon buttons">
+          <button class="ui red basic inverted button" 
+            ng-click="stopButton()"
+            ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
+            <i class="stop icon"></i>
+          </button>
+          <button class="ui yellow basic inverted button" 
+            ng-click="pauseButton()"
+            ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
+            <i class="pause icon"></i>
+          </button>
+            <button class="ui green basic inverted button" 
+            ng-click="playButton()"
+            ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
+            <i class="play icon"></i>
+          </button>
+        </div>
+      </div>
+      <div class="three wide column">
+        <!-- PLAYER OPTIONS -->
+        <div class="fluid ui three large icon buttons">
+          <button class="ui red basic inverted button" 
+            ng-click="stopButton()"
+            ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
+            <i class="stop icon"></i>
+          </button>
+          <button class="ui yellow basic inverted button" 
+            ng-click="pauseButton()"
+            ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
+            <i class="pause icon"></i>
+          </button>
+            <button class="ui green basic inverted button" 
+            ng-click="playButton()"
+            ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
+            <i class="play icon"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -73,25 +149,6 @@
             </div>
           </div>
           <!--  -->
-        </div>
-        <div class="ui divider"></div>
-        <!-- PLAYER OPTIONS -->
-        <div class="fluid ui three large icon buttons">
-          <button class="ui red basic inverted button" 
-            ng-click="stopButton()"
-            ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
-            <i class="stop icon"></i>
-          </button>
-          <button class="ui yellow basic inverted button" 
-            ng-click="pauseButton()"
-            ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
-            <i class="pause icon"></i>
-          </button>
-            <button class="ui green basic inverted button" 
-            ng-click="playButton()"
-            ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
-            <i class="play icon"></i>
-          </button>
         </div>
       </div>
     </div>
