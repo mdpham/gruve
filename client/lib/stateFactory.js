@@ -6,6 +6,9 @@ gruve.factory("modalPlayers", function(){
 		this.idle = ".ui.basic.fullscreen.modal.player.idle";
 	};
 
+	modalPlayers.hideAll = function(){
+		$(".ui.basic.fullscreen.modal.player").modal("hide");
+	}
 	modalPlayers.showIdle = function(){
 		$(".ui.basic.fullscreen.modal.player.idle").modal("show");
 	};
@@ -76,6 +79,9 @@ gruve.factory("gruveState", function(){
 			},
 			onstop: function(){
 				gruveState.updateCurrentSoundPosition(0);
+			},
+			ondataerror: function(){
+				console.log("DATAERROR");
 			}
 		});
 		//

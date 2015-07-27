@@ -17,21 +17,22 @@ gruve.controller("homeCtrl",
 		});
 
 		//consider moving into factory
-		var players = {
-			all: ".ui.basic.fullscreen.modal.player.playing",
-			playing: ".ui.basic.fullscreen.modal.player.playing",
-			idle: ".ui.basic.fullscreen.modal.player.idle"
-		};
+		// var players = {
+		// 	all: ".ui.basic.fullscreen.modal.player.playing",
+		// 	playing: ".ui.basic.fullscreen.modal.player.playing",
+		// 	idle: ".ui.basic.fullscreen.modal.player.idle"
+		// };
 		scope.togglePlayer = function(){
 			//Start Discovering
-			$(players.all).modal("hide");
+			// $(players.all).modal("hide");
+			modalPlayers.hideAll();
 			if (!scope.gruveState.getAudioState()) {
 				// $(players.idle).modal("show");
 				modalPlayers.showIdle();
 			} else {
 				// $(players.playing).modal("show");
 				modalPlayers.showPlaying();
-			}
+			};
 		};
 
 		scope.togglePlaylists = function(){

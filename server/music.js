@@ -44,7 +44,10 @@ Meteor.startup(function(){
 				t.gruve = {};
 				//Track artwork
 				if (t.artwork_url == null) {t.gruve.artwork_url = config.assets.missingPNG;}
-				else {t.gruve.artwork_url = t.artwork_url.replace("large", "t500x500");};
+				else {
+					t.artwork_url = t.artwork_url.replace("large", "t500x500");
+					t.gruve.artwork_url = t.artwork_url;
+				};
 				//User avatar artwork
 				// t.gruve.avatar_url = t.user.avatar_url.replace("large", "t500x500");
 			});
