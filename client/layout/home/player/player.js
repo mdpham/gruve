@@ -19,4 +19,9 @@ Template['menu-player'].rendered = function(){
 		on: "click",
 		position: "bottom right"
 	});
+
+	//Mute status in menu player
+	$(".current-track-mute-status")
+		.transition("set looping")
+		.transition("pulse", "2000ms");
 };

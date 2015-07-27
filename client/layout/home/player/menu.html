@@ -16,14 +16,14 @@
 
 <!-- Popups -->
 <!-- Track popup -->
-<div class="ui orange current-track-title-popup popup">
+<div class="ui inverted current-track-title-popup popup">
   <!-- Classes for changing url in selectTrack -->
   <a class="current-artwork-href" target="_blank" ng-click="pauseButton()">
     <img class="current-artwork">
   </a>
 </div>
 <!-- Artist popup -->
-<div class="ui orange current-track-username-popup popup">
+<div class="ui inverted current-track-username-popup popup">
   <a class="current-avatar-href" target="_blank" ng-click="pauseButton()">
     <img class="current-avatar">
   </a>
@@ -58,7 +58,7 @@
         <div class="text value">
           <h1 class="ui red header">
             <!-- <span class="current-track-mute-status"></span> -->
-            <span ng-show="muteStatus">Muted</span>
+            <span ng-show="muteStatus" class="current-track-mute-status">Muted</span>
 
           </h1>
         </div>
