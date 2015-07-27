@@ -6,6 +6,10 @@
 .content-container {
 	margin-top: 70px !important;
 	/*margin-bottom: 14px !important;*/
+	/*background-color: orange;*/
+	background-color: rgb(209,84,22);
+	background-image: url("images/white-brushed.png");
+	background-repeat: repeat;
 }
 .tracks-container, .landing-container {
 	margin-top: 14px !important;
@@ -14,10 +18,10 @@
 
 /*Artwork*/
 img.artwork {
-	background-color: rgb(167,196,21);
+	background-color: rgb(209,84,22);
 }
 .missing-artwork {
-	background-color: rgb(167,196,21);
+	/*background-color: rgb(167,196,21);*/
 /*	background-image: url("images/white-brushed.png")*/
 }
 
