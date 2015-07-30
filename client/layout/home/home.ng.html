@@ -44,6 +44,7 @@
 				<div class="content">
 					<a class="header">
 						<!-- <span ng-bind="track.title"></span> -->
+						<span ng-bind="$index"></span>
 					</a>
 					<div class="meta">
 					  <span class="left floated play">
@@ -61,7 +62,8 @@
 				</div>
 			  	<div class="extra content">
 					<span class="left floated">
-						<a ng-click="selectTrack(track.id)">Play</a>
+						<!-- <a ng-click="selectTrack(track.id)">Play</a> -->
+						<a ng-click="playTrack(track.id, $index)">Play</a>
 					</span>
 					<span class="right floated">
 						<a ng-href="{{track.permalink_url}}" target="_blank">See More</a>

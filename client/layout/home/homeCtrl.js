@@ -1,11 +1,10 @@
 gruve.controller("homeCtrl",
-	["$scope","$meteor","$http","$interval", "gruveState", "modalPlayers",
-	function($scope, $meteor, $http, $interval, gruveState, modalPlayers){
+	["$scope","$meteor","$http","$interval", "gruveState", "modalPlayers", "queue",
+	function($scope, $meteor, $http, $interval, gruveState, modalPlayers, queue){
 		scope = $scope;
 		//STATE WATCHING//
 		//gruveState starts with no playing and no player open
 		scope.gruveState = new gruveState(false, "stop", false);
-
 
 		//Playlists
 		scope.playlists = $meteor.collection(Playlists);
@@ -69,12 +68,26 @@ gruve.controller("homeCtrl",
 						$("img.playlist-interval-artwork").attr("src", _.sample(_.pluck(playlist.tracks, "artwork_url")));
 						// scope.tracks = _.shuffle(scope.tracks);
 					}, 2000);
-
-
+					return playlist;
 				})
+				//Start queue for selected playlist
+				.then(function(playlist){
+					scope.queue = new queue(playlist, "linear",null);
+				});
 		};
 
 		scope.currentTrack;
+		scope.nextTrack = function(){
+			console.log("next Track", scope.queue.getNext())
+		};
+		scope.playTrack = function(track_id, index) {
+			scope.selectTrack(track_id);
+			scope.queueTrack(index);
+			var next = scope.queue.getNext();
+		};
+		scope.queueTrack = function(index){
+			scope.queue.changePosn(index);
+		};
 		scope.selectTrack = function(id){
 			scope.gruveState.getAudioState(true);
 			//SoundManager config for waveform
@@ -96,7 +109,7 @@ gruve.controller("homeCtrl",
 				})
 				//Load track into soundManager2
 				.then(function(track){
-					console.log(track);
+					// console.log(track);
 					gruveState.loadSound(track);
 					scope.muteStatus = false;
 				})
@@ -104,7 +117,16 @@ gruve.controller("homeCtrl",
 				.then(function(){
 					scope.gruveState.getPlayingState("playing");
 					gruveState.playCurrentSound();
-				});
+				})
+				//Queue
+				.then(function(){
+					soundManager.getSoundById("current").onPosition(soundManager.getSoundById("current").duration,
+						function(){
+							console.log("end of track");
+							scope.nextTrack();
+						});
+					//find index for init_posn
+				})
 		};
 
 
