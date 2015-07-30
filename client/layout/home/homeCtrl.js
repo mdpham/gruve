@@ -77,19 +77,18 @@ gruve.controller("homeCtrl",
 		};
 
 		scope.currentTrack;
-		scope.nextTrack = function(){
-			console.log("next Track", scope.queue.getNext())
-		};
-		scope.playTrack = function(track_id, index) {
-			scope.selectTrack(track_id);
-			scope.queueTrack(index);
-			var next = scope.queue.getNext();
+		scope.selectTrack = function(trackID, index) {
+			console.log("playTrack", trackID, index)
+			//Sound
+			scope.playTrack(trackID);
+			//Position and Queueing
+			scope.queue.changePosn(index);
 		};
 		scope.queueTrack = function(index){
 			scope.queue.changePosn(index);
 			console.log("scope.queue", scope.queue);
 		};
-		scope.selectTrack = function(id){
+		scope.playTrack = function(id){
 			scope.gruveState.getAudioState(true);
 			//SoundManager config for waveform
 			soundManager.setup({flashVersion: 9});
@@ -135,8 +134,9 @@ gruve.controller("homeCtrl",
 						},
 						onfinish: function(){
 							console.log(this, "finished playing");
-							console.log("next", scope.queue.getNext());
-							scope.selectTrack(scope.queue.getNext().id);
+							var next = scope.queue.getNext();
+							console.log("next", next);
+							scope.selectTrack(next.gruve.id, next.gruve.posn);
 						}
 					});
 					//
@@ -189,6 +189,24 @@ gruve.controller("homeCtrl",
 		};
 		scope.volumeMuteButton = function(){
 			scope.muteStatus = gruveState.volumeMute();
+		};
+		//
+
+		//QUEUEING OPTIONS//
+		scope.backwardButton = function(){
+			console.log("backward");
+		};
+		scope.forwardButton = function(){
+			console.log("forward");
+			var next = scope.queue.getNext();
+			scope.selectTrack(next.gruve.id, next.gruve.posn);
+		};
+		//
+
+		//PLAYBACK OPTIONS//
+		scope.playbackButton = function(type){
+			console.log("change queue type to ", type);
+			scope.queue.changeType(type);
 		};
 		//
 

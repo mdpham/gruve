@@ -32,28 +32,39 @@
         </div>
       </div>
       <div class="three wide column">
-        <!-- PLAYER OPTIONS -->
+        <!-- QUEUEING OPTIONS -->
+        <div class="fluid ui two large icon buttons">
+          <button class="ui basic inverted button" ng-click="backwardButton()">
+            <i class="backward icon"></i>
+          </button>
+          <button class="ui basic inverted button" ng-click="forwardButton()">
+            <i class="forward icon"></i>
+          </button>
+        </div>
+      </div>
+      <div class="three wide column">
+        <!-- PLAYBACK OPTIONS -->
         <div class="fluid ui three large icon buttons">
-          <button class="ui red basic inverted button" 
-            ng-click="stopButton()"
-            ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
-            <i class="stop icon"></i>
+          <button class="ui basic inverted button" 
+            ng-click="playbackButton('linear')" 
+            ng-class="queue.getType() == 'linear' ? 'active' : ''">
+            <i class="long arrow right icon"></i>
           </button>
-          <button class="ui yellow basic inverted button" 
-            ng-click="pauseButton()"
-            ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
-            <i class="pause icon"></i>
+          <button class="ui basic inverted button" 
+            ng-click="playbackButton('shuffle')" 
+            ng-class="queue.getType() == 'shuffle' ? 'active' : ''">
+            <i class="random icon"></i>
           </button>
-            <button class="ui green basic inverted button" 
-            ng-click="playButton()"
-            ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
-            <i class="play icon"></i>
+            <button class="ui basic inverted button" 
+            ng-click="playbackButton('repeat')" 
+            ng-class="queue.getType() == 'repeat' ? 'active' : ''">
+            <i class="repeat icon"></i>
           </button>
         </div>
       </div>
       <div class="three wide column">
         <!-- PLAYER OPTIONS -->
-        <div class="fluid ui three large icon buttons">
+<!--         <div class="fluid ui three large icon buttons">
           <button class="ui red basic inverted button" 
             ng-click="stopButton()"
             ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
@@ -69,27 +80,7 @@
             ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
             <i class="play icon"></i>
           </button>
-        </div>
-      </div>
-      <div class="three wide column">
-        <!-- PLAYER OPTIONS -->
-        <div class="fluid ui three large icon buttons">
-          <button class="ui red basic inverted button" 
-            ng-click="stopButton()"
-            ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
-            <i class="stop icon"></i>
-          </button>
-          <button class="ui yellow basic inverted button" 
-            ng-click="pauseButton()"
-            ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
-            <i class="pause icon"></i>
-          </button>
-            <button class="ui green basic inverted button" 
-            ng-click="playButton()"
-            ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
-            <i class="play icon"></i>
-          </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
