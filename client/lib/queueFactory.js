@@ -24,6 +24,7 @@ gruve.factory("queue", function(){
 					break;
 			};
 			console.log("next", next);
+			//update posn
 			return next;
 		},
 		changeType: function(type){

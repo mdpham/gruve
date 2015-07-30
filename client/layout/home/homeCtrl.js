@@ -87,6 +87,7 @@ gruve.controller("homeCtrl",
 		};
 		scope.queueTrack = function(index){
 			scope.queue.changePosn(index);
+			console.log("scope.queue", scope.queue);
 		};
 		scope.selectTrack = function(id){
 			scope.gruveState.getAudioState(true);
@@ -110,7 +111,36 @@ gruve.controller("homeCtrl",
 				//Load track into soundManager2
 				.then(function(track){
 					// console.log(track);
-					gruveState.loadSound(track);
+					// gruveState.loadSound(track);
+					// 
+					//Reset sounds
+					soundManager.stopAll();
+					soundManager.destroySound("current");
+					//Create sound
+					soundManager.createSound({
+						id: "current",
+						url: track.stream_url + "?client_id="+config.client_id,
+						volume: 50,
+						//Tracks track position and volume
+						whileplaying: function(){
+							//'this' provides soundManager sound object
+							gruveState.updateCurrentSoundPosition(this.position);
+							gruveState.updateCurrentSoundVolume();
+						},
+						onstop: function(){
+							gruveState.updateCurrentSoundPosition(0);
+						},
+						ondataerror: function(){
+							console.log("DATAERROR");
+						},
+						onfinish: function(){
+							console.log(this, "finished playing");
+							console.log("next", scope.queue.getNext());
+							scope.selectTrack(scope.queue.getNext().id);
+						}
+					});
+					//
+					// 
 					scope.muteStatus = false;
 				})
 				//Change state and play
