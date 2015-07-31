@@ -45,17 +45,17 @@
       <div class="three wide column">
         <!-- PLAYBACK OPTIONS -->
         <div class="fluid ui three large icon buttons">
-          <button class="ui blue basic inverted button" 
+          <button class="ui olive basic inverted button" 
             ng-click="playbackButton('linear')" 
             ng-class="queue.type == 'linear' ? 'active' : ''">
             <i class="long arrow right icon"></i>
           </button>
-          <button class="ui blue basic inverted button" 
+          <button class="ui olive basic inverted button" 
             ng-click="playbackButton('shuffle')" 
             ng-class="queue.type == 'shuffle' ? 'active' : ''">
             <i class="random icon"></i>
           </button>
-            <button class="ui blue basic inverted button" 
+            <button class="ui olive basic inverted button" 
             ng-click="playbackButton('repeat')" 
             ng-class="queue.type == 'repeat' ? 'active' : ''">
             <i class="repeat icon"></i>
@@ -110,37 +110,7 @@
       </div>
       <!-- Previous/Next -->
       <div class="three wide column">
-        <div class="ui two column grid">
-          <!-- Previous Song -->
-          <div class="column">
-            <div class="ui card">
-              <div class="image">
-                <div class="ui top attached label">
-                  <h4 class="ui center aligned header">
-                    <i class="backward icon"></i>
-                    <!-- Previous -->
-                  </h4>
-                </div>
-                <img class="ui fluid image previous-artwork" src="images/missing.png">
-              </div>
-            </div>
-          </div>
-          <!-- Next Song -->
-          <div class="column">
-            <div class="ui card">
-              <div class="image">
-                <div class="ui top attached label">
-                  <h4 class="ui center aligned header">
-                    <!-- Next -->
-                    <i class="forward icon"></i>
-                  </h4>
-                </div>
-                <img class="ui fluid image next-artwork" src="images/missing.png">
-              </div>
-            </div>
-          </div>
-          <!--  -->
-        </div>
+        three
       </div>
     </div>
   </div>
