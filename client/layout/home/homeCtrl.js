@@ -65,7 +65,14 @@ gruve.controller("homeCtrl",
 					$interval.cancel(scope.intervalArtwork);
 					scope.intervalArtwork = $interval(function(){
 						// console.log("interval", _.sample(_.pluck(playlist.tracks, "artwork_url")));
-						$("img.playlist-interval-artwork").attr("src", _.sample(_.pluck(playlist.tracks, "artwork_url")));
+						$("img.playlist-interval-artwork").attr("src", 
+							_.chain(playlist.tracks)
+								.map(function(t){return t.artwork_url})
+								.filter(function(url){return url})
+								.sample()
+								.value()
+							// _.sample(_.pluck(playlist.tracks, "artwork_url"))
+						);
 						// scope.tracks = _.shuffle(scope.tracks);
 					}, 2000);
 					return playlist;
