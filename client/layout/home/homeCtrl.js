@@ -72,13 +72,13 @@ gruve.controller("homeCtrl",
 				})
 				//Start queue for selected playlist
 				.then(function(playlist){
-					scope.queue = new queue(playlist, "linear",null);
+					scope.queue = new queue(playlist, "linear" ,null);
 				});
 		};
 
 		scope.currentTrack;
 		scope.selectTrack = function(trackID, index) {
-			console.log("playTrack", trackID, index)
+			// console.log("playTrack", trackID, index)
 			//Sound
 			scope.playTrack(trackID);
 			//Position and Queueing
@@ -206,7 +206,8 @@ gruve.controller("homeCtrl",
 		//PLAYBACK OPTIONS//
 		scope.playbackButton = function(type){
 			console.log("change queue type to ", type);
-			scope.queue.changeType(type);
+			scope.queueType = scope.queue.changeType(type);
+			console.log("qtype", scope.queueType)
 		};
 		//
 

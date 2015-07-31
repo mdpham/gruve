@@ -47,17 +47,17 @@
         <div class="fluid ui three large icon buttons">
           <button class="ui basic inverted button" 
             ng-click="playbackButton('linear')" 
-            ng-class="queue.getType() == 'linear' ? 'active' : ''">
+            ng-class="(queue.getType() == 'linear') ? 'active' : ''">
             <i class="long arrow right icon"></i>
           </button>
           <button class="ui basic inverted button" 
             ng-click="playbackButton('shuffle')" 
-            ng-class="queue.getType() == 'shuffle' ? 'active' : ''">
+            ng-class="queueType == 'shuffle' ? 'active' : ''">
             <i class="random icon"></i>
           </button>
             <button class="ui basic inverted button" 
             ng-click="playbackButton('repeat')" 
-            ng-class="queue.getType() == 'repeat' ? 'active' : ''">
+            ng-class="queueType == 'repeat' ? 'active' : ''">
             <i class="repeat icon"></i>
           </button>
         </div>
