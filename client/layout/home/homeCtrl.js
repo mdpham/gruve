@@ -194,6 +194,8 @@ gruve.controller("homeCtrl",
 		//QUEUEING OPTIONS//
 		scope.backwardButton = function(){
 			console.log("backward");
+			var prev = scope.queue.getPrev();
+			scope.selectTrack(prev.gruve.id, prev.gruve.posn);
 		};
 		scope.forwardButton = function(){
 			console.log("forward");

@@ -31,17 +31,17 @@
 <!-- Position popup -->
 <div class="ui inverted current-track-position-popup popup">
   <div class="fluid ui three large icon buttons">
-    <button class="ui red basic inverted button" 
+    <button class="ui red button" 
       ng-click="stopButton()"
       ng-class="gruveState.getPlayingState() == 'stop' ? 'active' : ''">
       <i class="stop icon"></i>
     </button>
-    <button class="ui yellow basic inverted button" 
+    <button class="ui yellow button" 
       ng-click="pauseButton()"
       ng-class="gruveState.getPlayingState() == 'pause' ? 'active' : ''">
       <i class="pause icon"></i>
     </button>
-      <button class="ui green basic inverted button" 
+      <button class="ui green button" 
       ng-click="playButton()"
       ng-class="gruveState.getPlayingState() == 'playing' ? 'active' : ''">
       <i class="play icon"></i>
@@ -51,22 +51,9 @@
   <div class="ui divider"></div>
   <!--  -->
   <div class="ui inverted segment">
-<!--     <div class="ui inverted large horizontal statistic">
-        <div class="text value">
-          <span class="current-track-volume"></span>
-        </div>
-        <div class="text value">
-          <h1 class="ui red header">
-            <span ng-show="muteStatus" class="current-track-mute-status">Muted</span>
-          </h1>
-        </div>
-    </div> -->
-    <div class="ui two columns center aligned grid">
-      <div class="column">
+    <div class="ui one columns center aligned grid">
+      <div class="center aligned column">
         <h1 class="ui header"><span class="current-track-volume"></span></h1>
-      </div>
-      <div class="column">
-        <h3 class="ui red header"><span ng-show="muteStatus" class="current-track-mute-status">Muted</span></h3>
       </div>
     </div>
 
@@ -87,8 +74,8 @@
       </button>
       <button class="ui basic inverted icon button" ng-click="volumeMuteButton()">
         <i class="large icons">
-          <i class="volume up icon"></i>
-          <i class="grey large dont icon"></i>
+          <i class="volume up icon" ng-class="muteStatus ? 'grey' : ''"></i>
+          <i class="large dont icon" ng-class="muteStatus ? 'red' : 'grey'"></i>
         </i>
       </button>
     </div>

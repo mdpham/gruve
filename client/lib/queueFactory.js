@@ -49,7 +49,28 @@ gruve.factory("queue", function(){
 			//update posn
 			return next;
 		},
-		getBackwards: function(){
+		getPrev: function(){
+			var prev, posn;
+			switch (this.type) {
+				case "linear":
+					posn = this.posn == 0 ? this.playlist.tracks.length-1 : this.posn-1;
+					prev = this.playlist.tracks[posn];
+					break;
+				case "shuffle":
+					prev = _.sample(this.playlist.tracks);
+					posn = _.indexOf(this.playlist.tracks, prev);
+					break;
+				case "repeat":
+					posn = this.posn;
+					prev = this.playlist.tracks[posn];
+					break;
+			};
+			this.posn = posn;
+			//
+			prev.gruve.id = prev.id;
+			prev.gruve.posn = posn;
+
+			return prev;
 		}
 	};
 
