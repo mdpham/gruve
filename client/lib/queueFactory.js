@@ -22,7 +22,8 @@ gruve.factory("queue", function(){
 			console.log('this', this);
 			switch (this.type) {
 				case "linear":
-					posn = this.posn+1;
+					//For repeating
+					posn = this.posn+1 == this.playlist.tracks.length ? 0 : this.posn+1;
 					next = this.playlist.tracks[posn];
 					console.log("next linear", next);
 					break;
@@ -40,6 +41,7 @@ gruve.factory("queue", function(){
 					break;
 			};
 			this.posn = posn;
+			//
 			next.gruve.id = next.id;
 			next.gruve.posn = posn;
 			//Add to history

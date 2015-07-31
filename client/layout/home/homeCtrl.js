@@ -135,7 +135,6 @@ gruve.controller("homeCtrl",
 						onfinish: function(){
 							console.log(this, "finished playing");
 							var next = scope.queue.getNext();
-							console.log("next", next);
 							scope.selectTrack(next.gruve.id, next.gruve.posn);
 						}
 					});
