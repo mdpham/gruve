@@ -5,12 +5,8 @@
 # but you can also edit it by hand.
 
 meteor-platform
-bootstrap
-fortawesome:fontawesome
 jquery
 less
-mizzao:jquery-ui
-richsilv:owl-carousel
 wenape:soundmanager
 urigo:angular
 semantic:ui
