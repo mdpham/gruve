@@ -9,9 +9,15 @@
 				<img class="playlist-interval-artwork">
 			</div>
 			<div class="content">
-				
 				<div class="header">
-					<div class="ui statistics">
+					<h1 class="ui center aligned large header">
+						<span ng-bind="currentPlaylist.gruve.startDate"></span>
+					</h1>
+					<div class="ui horizontal divider">TO</div>
+					<h1 class="ui center aligned large header">
+						<span ng-bind="currentPlaylist.gruve.endDate"></span>
+					</h1>
+<!-- 					<div class="ui statistics">
 						<div class="statistic">
 							<span><strong>From</strong></span>
 							<div class="text value"><span ng-bind="currentPlaylist.gruve.startDate"></span></div>
@@ -20,12 +26,14 @@
 							<span><strong>To</strong></span>
 							<div class="text value"><span ng-bind="currentPlaylist.gruve.endDate"></span></div>
 						</div>
-					</div>
+					</div> -->
 				</div>
-				<div class="meta">
+				<div class="description">
 					<span ng-bind="currentPlaylist.duration"></span> milliseconds
 				</div>
-
+				<div class="meta">
+					<span></span>
+				</div>
 			</div>
 		</div>
 		</div>
@@ -37,15 +45,16 @@
         <feImage xlink:href="images/missing.png"/>
     </filter>
 	<path d="M 50 100 L 100000 100" stroke="white" stroke-width="5"/>
-	<circle cx="50" cy="100" r="30" filter="url('#image')"></circle>
+		<circle cx="50" cy="100" r="30" filter="url('#image')"></circle>
+	
 </svg>
 </div> -->
 <!-- List -->
-	<div class="ui four column stackable double grid">
+	<div class="ui seven column stackable double grid">
 		<div class="column" ng-repeat="playlist in playlists">
-			<a class="ui button" ng-click="selectPlaylist(playlist.id)">
+			<button class="ui fluid basic inverted button" ng-click="selectPlaylist(playlist.id)">
 				<span ng-bind="playlist.title"></span>
-			</a>
+			</button>
 		</div>
 	</div>
 
