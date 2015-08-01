@@ -1,0 +1,174 @@
+<!-- INLCUDE BOTH IDLE AND PLAYING PLAYERS -->
+<template name="modal-player">
+<!-- PLAYER to show when playing, appears after any track has ever been selected-->
+<div class="ui basic fullscreen modal player playing">
+  <!-- Content -->
+  <div class="content">
+    <div class="ui stackable grid">
+        <!-- "Listening To..." -->
+        <div class="four wide column">
+          <h1 class="large ui left aligned inverted header">
+            Listening to...
+          </h1>
+        </div>
+        <!-- Player Options -->
+        <div class="three wide column">
+          <!-- Stop, Pause, Play buttons -->
+          <div class="fluid ui three big icon buttons">
+            <button class="ui red basic inverted button" 
+              ng-click="stopButton()"
+              ng-class="gruveState.playing == 'stop' ? 'active' : ''">
+              <i class="large stop icon"></i>
+            </button>
+            <button class="ui yellow basic inverted button" 
+              ng-click="pauseButton()"
+              ng-class="gruveState.playing == 'pause' ? 'active' : ''">
+              <i class="large pause icon"></i>
+            </button>
+            <button class="ui green basic inverted button" 
+              ng-click="playButton()"
+              ng-class="gruveState.playing == 'playing' ? 'active' : ''">
+              <i class="large play icon"></i>
+            </button>
+          </div>
+        </div>
+        <!-- @end Player Options -->
+        <!-- Queueing Options -->
+        <div class="three wide column">
+          <!-- Backward, Forward buttons -->
+          <div class="fluid ui two big icon buttons">
+            <button class="ui basic inverted button" ng-click="backwardButton()">
+              <i class="large backward icon"></i>
+            </button>
+            <button class="ui basic inverted button" ng-click="forwardButton()">
+              <i class="large forward icon"></i>
+            </button>
+          </div>
+        </div>
+        <!-- @end Queueing Options -->
+        <!-- Playback Options -->
+        <div class="three wide column">
+          <!-- Linear, Shuffle, Repeat buttons -->
+          <div class="fluid ui three big icon buttons">
+            <button class="ui olive basic inverted button" 
+              ng-click="playbackButton('linear')" 
+              ng-class="queue.type == 'linear' ? 'active' : ''">
+              <i class="large long arrow right icon"></i>
+            </button>
+            <button class="ui olive basic inverted button" 
+              ng-click="playbackButton('shuffle')" 
+              ng-class="queue.type == 'shuffle' ? 'active' : ''">
+              <i class="large random icon"></i>
+            </button>
+              <button class="ui olive basic inverted button" 
+              ng-click="playbackButton('repeat')" 
+              ng-class="queue.type == 'repeat' ? 'active' : ''">
+              <i class="large repeat icon"></i>
+            </button>
+          </div>
+        </div>
+        <!-- @end Playback Options -->
+        <!-- Volume Options -->
+        <div class="three wide column">
+          <!-- Volume Up, Volume Down, Mute buttons -->
+          <div class="fluid ui three big buttons">
+            <button class="ui basic inverted icon button" ng-click="volumeDownButton()">
+              <i class="large icons">
+                <i class="volume up icon"></i>
+                <i class="blue corner minus icon"></i>
+              </i>
+            </button>
+            <button class="ui basic inverted icon button" ng-click="volumeUpButton()">
+              <i class="large icons">
+                <i class="volume up icon"></i>
+                <i class="blue corner plus icon"></i>
+              </i>
+            </button>
+            <button class="ui basic inverted icon button" ng-click="volumeMuteButton()">
+              <i class="large icons">
+                <i class="volume up icon" ng-class="muteStatus ? 'grey' : ''"></i>
+                <i class="large dont icon" ng-class="muteStatus ? 'red' : 'grey'"></i>
+              </i>
+            </button>
+          </div>
+        </div>
+        <!-- @end Volume Options -->
+
+        <!-- Track Artwork -->
+        <div class="four wide column">
+          <img class="ui fluid image current-artwork">
+        </div>
+        <!-- @end Track Artwork -->
+        <!-- Track information -->
+        <div class="twelve wide column">
+          <div class="ui raised basic black inverted segment">
+            <!-- current-track-info: artist and track title -->
+            <h1 class="ui left aligned inverted header current-track-info">
+              <span class="current-username" ng-bind="currentTrack.user.username"></span>
+              <div class="ui inverted horizontal divider">track</div>
+              <span class="current-title" ng-bind="currentTrack.title"></span>
+              <div class="ui inverted horizontal divider">at</div>
+              <!-- current-track-progress: position / duration -->
+              <h1 class="ui center aligned inverted header current-track-progress">
+                <span class="current-track-position"></span>/<span ng-bind="currentTrack.gruve.duration"></span>
+              </h1>
+            </h1>
+          </div>
+        </div>
+    </div>
+    <!-- @end .stackable.grid -->
+  </div>
+  <!-- @end Content -->
+  <!-- Actions -->
+  <div class="actions">
+    <div class="ui basic inverted black deny button">
+      Exit
+    </div>
+  </div>
+  <!-- @end Actions -->
+</div>
+
+<!-- PLAYER to show up when idle, this only appears before a track has ever been selected -->
+<div class="ui basic fullscreen modal player idle">
+  <!-- Player -->
+  <div class="header">
+    <h1 class="ui center aligned olive header">
+      <span>You're not listening to anything</span>
+    </h1>
+  </div>
+  <!-- Content -->
+  <div class="content">
+    <!-- IDLE STATE -->
+    <div class="ui inverted center aligned segment">
+<div class="ui steps">
+  <div class="step">
+    <i class="violet calendar icon"></i>
+    <div class="content">
+      <div class="title">Time</div>
+      <div class="description">Choose a week</div>
+    </div>
+  </div>
+  <div class="step">
+    <i class="purple music icon"></i>
+    <div class="content">
+      <div class="title">Music</div>
+      <div class="description">Choose a track</div>
+    </div>
+  </div>
+  <div class="step">
+    <i class="pink sound icon"></i>
+    <div class="content">
+      <div class="title">Listen</div>
+    </div>
+  </div>
+</div>
+  </div>
+  </div>
+  <!-- Actions -->
+  <div class="actions">
+    <div class="ui olive inverted deny button">
+      Got it!
+    </div>
+  </div>
+</div>
+</template>

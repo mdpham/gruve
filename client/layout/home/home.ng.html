@@ -1,0 +1,77 @@
+<!-- PLAYER -->
+<meteor-include src="modal-player"></meteor-include>
+<!-- @end PLAYER -->
+
+<!-- HIDDEN MENU: PLAYLISTS -->
+<div class="ui top sidebar playlists-topbar">
+	<meteor-include src="playlists"></meteor-include>
+</div>
+<!-- @end HIDDEN MENU -->
+
+<!-- MAIN CONTENT -->
+<div class="pusher">
+<!-- TOP MENU: Navigation -->
+<div class="ui top fixed inverted menu main-menu-container">
+	<a class="item" ng-click="togglePlaylists()">
+		<i class="big calendar outline icon"></i>
+	</a>
+	<a class="item" ng-click="togglePlayer()">
+		<i class="big sound icon"></i>
+	</a>
+	<div class="right menu">
+		<div class="item" ng-show="currentTrack">
+			<meteor-include src="menu-player"></meteor-include>
+		</div>
+		<a href="https://soundcloud.com" target="_blank" class="item">
+			<i class="big orange soundcloud icon"></i>
+		</a>
+	</div>
+</div>
+
+<!-- CONTENT: TRACKS	-->
+<div class="ui content-container">
+	<div class="ui one column grid landing-container" ng-show="!tracks">
+		<div class="column">
+		<meteor-include src="landing"></meteor-include>
+		</div>
+	</div>
+	<div class="ui five column stackable grid tracks-container">
+		<div class="column" ng-repeat="track in tracks">
+			<div class="ui fluid card">
+				<div class="small image">
+					<img ng-src="{{track.gruve.artwork_url}}" class="artwork">
+				</div>
+				<div class="content">
+					<a class="header">
+						<!-- <span ng-bind="track.title"></span> -->
+						<!-- <span ng-bind="$index"></span> -->
+					</a>
+					<div class="meta">
+					  <span class="left floated play">
+					  	<i class="play icon"></i>
+					  	<span ng-bind="track.playback_count"></span>
+					  </span>
+					  <span class="right floated heart">
+					  	<i class="heart icon"></i>
+					  	<span ng-bind="track.favoritings_count"></span>
+					  </span>
+					</div>
+					<div class="description">
+						<!-- description here -->
+					</div>
+				</div>
+			  	<div class="extra content">
+					<span class="left floated">
+						<!-- <a ng-click="selectTrack(track.id)">Play</a> -->
+						<a ng-click="selectTrack(track.id, $index)">Play</a>
+					</span>
+					<span class="right floated">
+						<a ng-href="{{track.permalink_url}}" target="_blank">See More</a>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<!-- @end MAIN CONTENT -->
